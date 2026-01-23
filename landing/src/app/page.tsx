@@ -5,6 +5,8 @@ import { ProblemSolutionSection } from "./components/sections/ProblemSolution";
 import { CapabilitiesSection } from "./components/sections/Capabilities";
 import { HowItWorksSection } from "./components/sections/HowItWorks";
 import { RolesSection } from "./components/sections/Roles";
+import { ProductProofSection } from "./components/sections/ProductProof";
+import { SecuritySection } from "./components/sections/Security";
 
 export default function Home() {
   return (
@@ -16,6 +18,8 @@ export default function Home() {
       <CapabilitiesSection />
       <HowItWorksSection />
       <RolesSection />
+      <ProductProofSection />
+      <SecuritySection />
     </main>
   );
 }
