@@ -36,9 +36,9 @@ export const ProductProofSection = () => {
           >
             <div className="p-4 border-b border-border/50">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                <div className="w-3 h-3 rounded-full bg-amber-500/60" />
-                <div className="w-3 h-3 rounded-full bg-success/60" />
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-amber-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
               </div>
             </div>
             <div className="p-6 space-y-4">
@@ -87,9 +87,9 @@ export const ProductProofSection = () => {
           >
             <div className="p-4 border-b border-border/50">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                <div className="w-3 h-3 rounded-full bg-amber-500/60" />
-                <div className="w-3 h-3 rounded-full bg-success/60" />
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-amber-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
               </div>
             </div>
             <div className="p-6">
@@ -145,9 +145,9 @@ export const ProductProofSection = () => {
           >
             <div className="p-4 border-b border-border/50">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                <div className="w-3 h-3 rounded-full bg-amber-500/60" />
-                <div className="w-3 h-3 rounded-full bg-success/60" />
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-amber-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
               </div>
             </div>
             <div className="p-6">
