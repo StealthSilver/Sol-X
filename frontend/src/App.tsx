@@ -1,15 +1,42 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Login from "./pages/Login";
+import RequestAccess from "./pages/RequestAccess";
+import Dashboard from "./pages/Dashboard";
+import AccessDenied from "./pages/AccessDenied";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <div className="bg-amber-500 text-4xl underline flex justify-around mb-20 py-10">
-        Hello
-      </div>
-      <div className="bg-blue-200 text-3xl flex justify-around py-10">
-        This is a react boiler-plate with typescript and tailwind
-      </div>
-    </>
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/request-access" element={<RequestAccess />} />
+        <Route path="/access-denied" element={<AccessDenied />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Default Route */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* 404 Route */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

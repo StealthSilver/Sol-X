@@ -64,7 +64,8 @@ export const login = async (req: Request, res: Response) => {
       },
       process.env.JWT_SECRET!,
       {
-        expiresIn: process.env.JWT_EXPIRY || "7d",
+        expiresIn: (process.env.JWT_EXPIRY ||
+          "7d") as jwt.SignOptions["expiresIn"],
       },
     );
 

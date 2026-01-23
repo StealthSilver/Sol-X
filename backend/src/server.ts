@@ -1,6 +1,68 @@
 import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import authRoutes from "./routes/auth.routes";
+
+dotenv.config();
+
 const app = express();
 
-app.listen(8000, () => {
-  console.log("Server is running on port 3000");
+console.log("✅ Modules loaded successfully");
+
+// Middleware
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+        ? ["https://sol-x.com"] // Update with your production domain
+        : ["http://localhost:5173", "http://localhost:3000"],
+    credentials: true,
+  }),
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+console.log("✅ Middleware configured");
+
+// Routes
+app.use("/api/auth", authRoutes);
+
+console.log("✅ Routes configured");
+
+// Health check
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    error: "Route not found",
+  });
+});
+
+// Global error handler
+app.use(
+  (
+    err: any,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
+    console.error("Global error handler:", err);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+    });
+  },
+);
+
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`🔗 API: http://localhost:${PORT}/api`);
 });
