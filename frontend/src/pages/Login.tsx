@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
-import { type login } from "../api/auth.api";
+import { authApi } from "../api/auth.api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const setAuth = useAuthStore((state) => state.setAuth);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,8 +17,8 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await login({ email, password });
-      setAuth(response.user, response.token);
+      const response = await authApi.login({ email, password });
+      setUser(response.user, response.accessToken);
       navigate("/dashboard");
     } catch (err: any) {
       setError(
