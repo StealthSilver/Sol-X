@@ -1,6 +1,9 @@
 import { Navbar } from "./components/sections/Navbar";
 import { HeroSection } from "./components/sections/Hero";
 import { TrustSection } from "./components/sections/Trust";
+import { ProblemSolutionSection } from "./components/sections/ProblemSolution";
+import { CapabilitiesSection } from "./components/sections/Capabilities";
+import { HowItWorksSection } from "./components/sections/HowItWorks";
 
 export default function Home() {
   return (
@@ -8,6 +11,9 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <TrustSection />
+      <ProblemSolutionSection />
+      <CapabilitiesSection />
+      <HowItWorksSection />
     </main>
   );
 }
