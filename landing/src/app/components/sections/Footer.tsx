@@ -21,7 +21,7 @@ const footerLinks = {
 
 export const Footer = () => {
   return (
-    <footer className="py-12 lg:py-16 border-t border-charcoal-500/30">
+    <footer className="py-8 lg:py-12 border-t border-charcoal-500/30">
       <div className="section-container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
@@ -99,7 +99,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-charcoal-500/30">
+      <div className="mt-12 pt-8 pb-0 border-t border-charcoal-500/30">
         <div className="section-container flex justify-center items-center">
           <p className="text-sm text-muted-foreground">
             © 2024 Sol-X. All rights reserved.

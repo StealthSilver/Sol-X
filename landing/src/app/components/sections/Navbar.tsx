@@ -29,10 +29,10 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
-          ? "bg-charcoal-900/95 backdrop-blur-lg border-b border-charcoal-500/30 shadow-2xl"
-          : "bg-transparent"
+          ? "bg-charcoal-900/95 backdrop-blur-lg border-charcoal-500/30 shadow-2xl"
+          : "bg-transparent border-transparent"
       }`}
     >
       <div className="section-container">
