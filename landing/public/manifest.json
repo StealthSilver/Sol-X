@@ -1,0 +1,19 @@
+{
+  "name": "Sol-X - Project Execution Platform for Renewable Energy",
+  "short_name": "Sol-X",
+  "description": "Unified platform for renewable energy project execution. Track milestones, manage tasks, capture evidence, and automate reporting.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1419",
+  "theme_color": "#F59E0B",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "orientation": "any"
+}
