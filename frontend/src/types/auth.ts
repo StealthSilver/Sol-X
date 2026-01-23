@@ -5,32 +5,32 @@ export type Role =
   | "SITE_ENGINEER"
   | "VIEWER";
 
-export interface User {
+export type User = {
   id: string;
   name: string;
   email: string;
   role: Role;
-}
+};
 
-export interface LoginRequest {
+export type LoginRequest = {
   email: string;
   password: string;
-}
+};
 
-export interface LoginResponse {
+export type LoginResponse = {
   accessToken: string;
   user: User;
-}
+};
 
-export interface AccessRequestData {
+export type AccessRequestData = {
   name: string;
   email: string;
   company: string;
   message: string;
-}
+};
 
-export interface ApiResponse<T = any> {
+export type ApiResponse<T = any> = {
   success: boolean;
   data?: T;
   error?: string;
-}
+};
