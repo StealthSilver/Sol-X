@@ -60,7 +60,7 @@ export const RolesSection = () => {
             Tailored for every role in your organization.
           </h2>
           <p className="body-default">
-            Sol-X delivers the right information to the right people. No noise, 
+            Sol-X delivers the right information to the right people. No noise,
             just relevant data for your specific responsibilities.
           </p>
         </motion.div>
@@ -83,7 +83,10 @@ export const RolesSection = () => {
               </h3>
               <ul className="space-y-3">
                 {role.benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
                     <div className="w-1 h-1 rounded-full bg-amber-500 mt-2 shrink-0" />
                     {benefit}
                   </li>
