@@ -7,6 +7,7 @@ import { HowItWorksSection } from "./components/sections/HowItWorks";
 import { RolesSection } from "./components/sections/Roles";
 import { ProductProofSection } from "./components/sections/ProductProof";
 import { SecuritySection } from "./components/sections/Security";
+import { CTASection } from "./components/sections/CTA";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <RolesSection />
       <ProductProofSection />
       <SecuritySection />
+      <CTASection />
     </main>
   );
 }
