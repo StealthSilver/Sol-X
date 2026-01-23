@@ -4,6 +4,7 @@ import { TrustSection } from "./components/sections/Trust";
 import { ProblemSolutionSection } from "./components/sections/ProblemSolution";
 import { CapabilitiesSection } from "./components/sections/Capabilities";
 import { HowItWorksSection } from "./components/sections/HowItWorks";
+import { RolesSection } from "./components/sections/Roles";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <ProblemSolutionSection />
       <CapabilitiesSection />
       <HowItWorksSection />
+      <RolesSection />
     </main>
   );
 }

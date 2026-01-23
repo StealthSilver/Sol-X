@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { X, Check } from "lucide-react";
 
@@ -63,7 +65,7 @@ export const ProblemSolutionSection = () => {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="mt-1 w-5 h-5 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0">
+                  <div className="mt-1 w-5 h-5 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
                     <X className="w-3 h-3 text-destructive" />
                   </div>
                   <span className="text-muted-foreground">{problem}</span>
@@ -98,7 +100,7 @@ export const ProblemSolutionSection = () => {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="mt-1 w-5 h-5 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+                  <div className="mt-1 w-5 h-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3 text-success" />
                   </div>
                   <span className="text-muted-foreground">{solution}</span>
