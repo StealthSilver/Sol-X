@@ -21,7 +21,10 @@ const footerLinks = {
 
 export const Footer = () => {
   return (
-    <footer className="py-8 lg:py-12 border-t border-charcoal-500/30">
+    <footer
+      id="contact"
+      className="py-8 lg:py-12 border-t border-charcoal-500/30"
+    >
       <div className="section-container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}

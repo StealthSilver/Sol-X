@@ -12,7 +12,7 @@ const projectTypes = [
 
 export const TrustSection = () => {
   return (
-    <section className="py-20 lg:py-28 bg-charcoal-700/30">
+    <section id="about" className="py-20 lg:py-28 bg-charcoal-700/30">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
