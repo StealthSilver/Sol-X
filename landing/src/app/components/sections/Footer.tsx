@@ -97,8 +97,10 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
+      </div>
 
-        <div className="mt-12 pt-8 border-t border-border/50 flex justify-center items-center">
+      <div className="mt-12 pt-8 border-t border-border/50">
+        <div className="section-container flex justify-center items-center">
           <p className="text-sm text-muted-foreground">
             © 2024 Sol-X. All rights reserved.
           </p>
