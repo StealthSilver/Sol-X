@@ -58,7 +58,7 @@ export const HeroSection = () => {
               className="flex flex-col sm:flex-row gap-4"
             >
               <Button variant="hero" size="xl">
-                Request Demo
+                Get Started
                 <ArrowRight className="ml-1" size={18} />
               </Button>
               <Button variant="heroOutline" size="xl">
