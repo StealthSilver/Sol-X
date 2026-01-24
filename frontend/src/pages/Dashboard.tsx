@@ -36,9 +36,9 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A]">
+    <div className="min-h-screen bg-[#0f0f0f]">
       {/* Header */}
-      <header className="bg-[#1E293B] border-b border-gray-700">
+      <header className="bg-[#1a1a1a] border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-semibold text-gray-50">Sol-X</h1>
@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Welcome Section */}
-        <div className="bg-[#1E293B] rounded-lg p-8 shadow-lg mb-8">
+        <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg mb-8">
           <div className="flex items-start justify-between">
             <div>
               <h2 className="text-3xl font-semibold text-gray-50 mb-2">
@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
 
         {/* User Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-[#1E293B] rounded-lg p-6 border border-gray-700">
+          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
             <div className="flex items-center mb-3">
               <svg
                 className="w-5 h-5 text-[#F59E0B] mr-2"
@@ -97,7 +97,7 @@ const Dashboard: React.FC = () => {
             <p className="text-lg font-semibold text-gray-50">{user?.name}</p>
           </div>
 
-          <div className="bg-[#1E293B] rounded-lg p-6 border border-gray-700">
+          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
             <div className="flex items-center mb-3">
               <svg
                 className="w-5 h-5 text-[#F59E0B] mr-2"
@@ -117,7 +117,7 @@ const Dashboard: React.FC = () => {
             <p className="text-lg font-semibold text-gray-50">{user?.email}</p>
           </div>
 
-          <div className="bg-[#1E293B] rounded-lg p-6 border border-gray-700">
+          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
             <div className="flex items-center mb-3">
               <svg
                 className="w-5 h-5 text-[#F59E0B] mr-2"

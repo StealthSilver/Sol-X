@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const AccessDenied: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4">
       <div className="w-full max-w-md text-center">
-        <div className="bg-[#1E293B] rounded-lg p-8 shadow-lg">
+        <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg">
           {/* Icon */}
           <div className="mb-6 flex justify-center">
             <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center">

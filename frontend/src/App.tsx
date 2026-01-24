@@ -6,13 +6,25 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
+import { AppLayout } from "./components/layout/AppLayout";
 
 // Lazy load components
 const Login = lazy(() => import("./pages/Login"));
 const RequestAccess = lazy(() => import("./pages/RequestAccess"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
+const RoleProtectedRoute = lazy(
+  () => import("./components/RoleProtectedRoute"),
+);
+
+// Dashboard pages
+const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const ReportsPage = lazy(() => import("./pages/ReportsPage"));
+const UsersPage = lazy(() => import("./pages/UsersPage"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage"));
+const TasksPage = lazy(() => import("./pages/TasksPage"));
+const ProgressPage = lazy(() => import("./pages/ProgressPage"));
 
 // Loading fallback
 const LoadingSpinner = () => (
@@ -22,7 +34,7 @@ const LoadingSpinner = () => (
       justifyContent: "center",
       alignItems: "center",
       height: "100vh",
-      backgroundColor: "#0F172A",
+      backgroundColor: "#0f0f0f",
       color: "#FAFAFA",
     }}
   >
@@ -31,7 +43,7 @@ const LoadingSpinner = () => (
         style={{
           width: "40px",
           height: "40px",
-          border: "4px solid #1E293B",
+          border: "4px solid #1a1a1a",
           borderTop: "4px solid #F59E0B",
           borderRadius: "50%",
           animation: "spin 1s linear infinite",
@@ -53,21 +65,78 @@ function App() {
           <Route path="/request-access" element={<RequestAccess />} />
           <Route path="/access-denied" element={<AccessDenied />} />
 
-          {/* Protected Routes */}
+          {/* Protected Routes with AppLayout */}
           <Route
-            path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <AppLayout />
               </ProtectedRoute>
             }
-          />
+          >
+            {/* Dashboard - All roles */}
+            <Route path="/dashboard" element={<DashboardPage />} />
+
+            {/* Projects - Admin, Project Manager */}
+            <Route
+              path="/projects"
+              element={
+                <RoleProtectedRoute
+                  allowedRoles={["MASTER_ADMIN", "ADMIN", "PROJECT_MANAGER"]}
+                >
+                  <ProjectsPage />
+                </RoleProtectedRoute>
+              }
+            />
+
+            {/* Reports - All roles */}
+            <Route path="/reports" element={<ReportsPage />} />
+
+            {/* Tasks - Site Engineers only */}
+            <Route
+              path="/tasks"
+              element={
+                <RoleProtectedRoute allowedRoles={["SITE_ENGINEER"]}>
+                  <TasksPage />
+                </RoleProtectedRoute>
+              }
+            />
+
+            {/* Progress Updates - Site Engineers only */}
+            <Route
+              path="/progress"
+              element={
+                <RoleProtectedRoute allowedRoles={["SITE_ENGINEER"]}>
+                  <ProgressPage />
+                </RoleProtectedRoute>
+              }
+            />
+
+            {/* Users - Admin only */}
+            <Route
+              path="/users"
+              element={
+                <RoleProtectedRoute allowedRoles={["MASTER_ADMIN", "ADMIN"]}>
+                  <UsersPage />
+                </RoleProtectedRoute>
+              }
+            />
+
+            {/* Settings - Admin only */}
+            <Route
+              path="/settings"
+              element={
+                <RoleProtectedRoute allowedRoles={["MASTER_ADMIN", "ADMIN"]}>
+                  <SettingsPage />
+                </RoleProtectedRoute>
+              }
+            />
+          </Route>
 
           {/* Default Route */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
           {/* 404 Route */}
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Suspense>
     </Router>

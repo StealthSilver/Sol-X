@@ -49,9 +49,9 @@ const RequestAccess: React.FC = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4">
         <div className="w-full max-w-md">
-          <div className="bg-[#1E293B] rounded-lg p-8 shadow-lg text-center">
+          <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg text-center">
             {/* Success Icon */}
             <div className="mb-6 flex justify-center">
               <div className="w-16 h-16 bg-[#10B981]/10 rounded-full flex items-center justify-center">
@@ -92,7 +92,7 @@ const RequestAccess: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
@@ -103,7 +103,7 @@ const RequestAccess: React.FC = () => {
         </div>
 
         {/* Request Access Card */}
-        <div className="bg-[#1E293B] rounded-lg p-8 shadow-lg">
+        <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg">
           <h2 className="text-xl font-semibold text-gray-50 mb-6">
             Request Access
           </h2>
@@ -128,7 +128,7 @@ const RequestAccess: React.FC = () => {
                 {...register("name")}
                 type="text"
                 id="name"
-                className="w-full px-4 py-3 bg-[#0F172A] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
                 placeholder="John Doe"
               />
               {errors.name && (
@@ -150,7 +150,7 @@ const RequestAccess: React.FC = () => {
                 {...register("email")}
                 type="email"
                 id="email"
-                className="w-full px-4 py-3 bg-[#0F172A] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
                 placeholder="you@company.com"
               />
               {errors.email && (
@@ -172,7 +172,7 @@ const RequestAccess: React.FC = () => {
                 {...register("company")}
                 type="text"
                 id="company"
-                className="w-full px-4 py-3 bg-[#0F172A] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
                 placeholder="Your Company"
               />
               {errors.company && (
@@ -194,7 +194,7 @@ const RequestAccess: React.FC = () => {
                 {...register("message")}
                 id="message"
                 rows={4}
-                className="w-full px-4 py-3 bg-[#0F172A] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200 resize-none"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200 resize-none"
                 placeholder="Tell us why you need access and what role you're interested in..."
               />
               {errors.message && (

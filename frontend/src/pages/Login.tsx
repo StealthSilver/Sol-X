@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
+import { useNotificationStore } from "../store/notificationStore";
 import { authApi } from "../api/auth.api";
 
 const Login = () => {
@@ -22,6 +23,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const setUser = useAuthStore((state) => state.setUser);
+  const { addNotification } = useNotificationStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,11 +33,13 @@ const Login = () => {
     try {
       const response = await authApi.login({ email, password });
       setUser(response.user, response.accessToken);
+      addNotification("success", `Welcome back, ${response.user.name}!`);
       navigate("/dashboard");
     } catch (err: any) {
-      setError(
-        err.response?.data?.message || "Login failed. Please try again.",
-      );
+      const errorMessage =
+        err.response?.data?.message || "Login failed. Please try again.";
+      setError(errorMessage);
+      addNotification("error", errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -48,7 +52,9 @@ const Login = () => {
 
     try {
       await authApi.requestAccess(requestForm);
-      setRequestMessage("Request sent! We'll get back to you shortly.");
+      const successMessage = "Request sent! We'll get back to you shortly.";
+      setRequestMessage(successMessage);
+      addNotification("success", successMessage);
       setRequestForm({ name: "", email: "", company: "", message: "" });
     } catch (err: any) {
       const errorMessage =
@@ -56,6 +62,7 @@ const Login = () => {
         err.response?.data?.message ||
         "Failed to submit request. Please try again.";
       setRequestMessage(errorMessage);
+      addNotification("error", errorMessage);
     } finally {
       setRequestLoading(false);
     }
