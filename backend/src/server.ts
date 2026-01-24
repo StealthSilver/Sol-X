@@ -14,7 +14,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? ["https://sol-x.com"] // Update with your production domain
+        ? ["https://sol-x-main.vercel.app", "https://sol-x.com"]
         : ["http://localhost:5173", "http://localhost:3000"],
     credentials: true,
   }),
