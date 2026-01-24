@@ -48,17 +48,17 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
     <motion.div
       initial={{ opacity: 0, x: 400 }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 400, scale: 0.95 }}
+      exit={{
+        opacity: 0,
+        x: 400,
+        scale: 0.95,
+        transition: { type: "tween", duration: 0.3, ease: "easeInOut" },
+      }}
       transition={{
         type: "spring",
         stiffness: 100,
         damping: 15,
         duration: 0.4,
-        exit: {
-          type: "tween",
-          duration: 0.3,
-          ease: "easeInOut",
-        },
       }}
       className={`flex items-start gap-3 min-w-[320px] max-w-md p-4 rounded-lg border ${config.bgColor} ${config.borderColor} backdrop-blur-sm shadow-lg`}
     >
