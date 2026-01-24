@@ -64,7 +64,7 @@ export const Navbar = () => {
 
           {/* Get Started Button - Desktop */}
           <div className="hidden lg:block">
-            <a href="https://sol-x-main.vercel.app/login">
+            <a href="https://sol-x-main.vercel.app">
               <Button variant="hero" size="default">
                 Get Started
               </Button>
@@ -113,7 +113,7 @@ export const Navbar = () => {
                   transition={{ duration: 0.2, delay: navLinks.length * 0.05 }}
                   className="pt-4"
                 >
-                  <a href="https://sol-x-main.vercel.app/login">
+                  <a href="https://sol-x-main.vercel.app/">
                     <Button variant="hero" size="default" className="w-full">
                       Get Started
                     </Button>

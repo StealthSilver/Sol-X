@@ -57,7 +57,7 @@ export const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a href="https://sol-x-main.vercel.app/login">
+              <a href="https://sol-x-main.vercel.app/">
                 <Button variant="hero" size="xl">
                   Get Started
                   <ArrowRight className="ml-1" size={18} />
