@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, AlertTriangle, XCircle, Info, X } from "lucide-react";
 import {
@@ -40,7 +40,7 @@ interface ToastProps {
   onClose: () => void;
 }
 
-const Toast: React.FC<ToastProps> = ({ id, type, message, onClose }) => {
+const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
   const config = notificationConfig[type];
   const Icon = config.icon;
 
