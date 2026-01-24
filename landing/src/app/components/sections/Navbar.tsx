@@ -64,9 +64,11 @@ export const Navbar = () => {
 
           {/* Get Started Button - Desktop */}
           <div className="hidden lg:block">
-            <Button variant="hero" size="default">
-              Get Started
-            </Button>
+            <a href="https://sol-x-main.vercel.app/login">
+              <Button variant="hero" size="default">
+                Get Started
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -111,9 +113,11 @@ export const Navbar = () => {
                   transition={{ duration: 0.2, delay: navLinks.length * 0.05 }}
                   className="pt-4"
                 >
-                  <Button variant="hero" size="default" className="w-full">
-                    Get Started
-                  </Button>
+                  <a href="https://sol-x-main.vercel.app/login">
+                    <Button variant="hero" size="default" className="w-full">
+                      Get Started
+                    </Button>
+                  </a>
                 </motion.div>
               </div>
             </div>

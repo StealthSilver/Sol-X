@@ -27,10 +27,12 @@ export const CTASection = () => {
               energy infrastructure projects.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl">
-                Get Started
-                <ArrowRight className="ml-1" size={18} />
-              </Button>
+              <a href="https://sol-x-main.vercel.app/login">
+                <Button variant="hero" size="xl">
+                  Get Started
+                  <ArrowRight className="ml-1" size={18} />
+                </Button>
+              </a>
               <Button variant="heroOutline" size="xl">
                 Read Docs
               </Button>
