@@ -17,7 +17,7 @@ export const Sidebar: React.FC = () => {
     <div className="h-full flex flex-col bg-[#1a1a1a] border-r border-[#404040]">
       {/* Logo */}
       <div className="h-16 flex items-center px-6 border-b border-[#404040]">
-        <h1 className="text-xl font-semibold text-[#F59E0B]">Sol-X</h1>
+        <img src="/solx-logo.svg" alt="Sol-X" className="h-8" />
       </div>
 
       {/* Navigation */}
