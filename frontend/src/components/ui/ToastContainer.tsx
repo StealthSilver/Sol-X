@@ -46,10 +46,20 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, x: 300, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, x: 400 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 400, scale: 0.95 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.4,
+        exit: {
+          type: "tween",
+          duration: 0.3,
+          ease: "easeInOut",
+        },
+      }}
       className={`flex items-start gap-3 min-w-[320px] max-w-md p-4 rounded-lg border ${config.bgColor} ${config.borderColor} backdrop-blur-sm shadow-lg`}
     >
       <Icon className="flex-shrink-0 mt-0.5" size={20} color={config.color} />
