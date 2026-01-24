@@ -12,10 +12,7 @@ console.log("✅ Modules loaded successfully");
 // Middleware
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? ["https://sol-x-main.vercel.app", "https://sol-x.com"]
-        : ["http://localhost:5173", "http://localhost:3000"],
+    origin: ["https://sol-x-main.vercel.app", "http://localhost:5173"],
     credentials: true,
   }),
 );
