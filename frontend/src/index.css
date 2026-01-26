@@ -4,6 +4,8 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--background);
+  overscroll-behavior: none;
 }
 
 :root {
