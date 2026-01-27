@@ -97,25 +97,6 @@ body {
     }
   }
 
-  /* Scrollbar Styling */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--charcoal-900);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--charcoal-500);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--gray-600);
-  }
-
   /* Focus Styles */
   *:focus-visible {
     outline: 2px solid var(--solar-amber-500);
@@ -129,4 +110,34 @@ body {
   }
 
   animation: fadeOut 0.3s ease-in forwards;
+}
+
+/* Global Scrollbar Styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #404040 #0f0f0f;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 4px;
+  border: 2px solid #0f0f0f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0f0f0f;
 }
