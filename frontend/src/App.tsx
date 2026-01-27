@@ -25,6 +25,7 @@ const UsersPage = lazy(() => import("./pages/UsersPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const TasksPage = lazy(() => import("./pages/TasksPage"));
 const ProgressPage = lazy(() => import("./pages/ProgressPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 
 // Loading fallback
 const LoadingSpinner = () => (
@@ -130,6 +131,9 @@ function App() {
                 </RoleProtectedRoute>
               }
             />
+
+            {/* Profile - All authenticated users */}
+            <Route path="/profile" element={<ProfilePage />} />
           </Route>
 
           {/* Default Route */}

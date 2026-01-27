@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Bell, ChevronDown, LogOut } from "lucide-react";
+import { Bell, LogOut, User, Settings } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,17 @@ export const Topbar: React.FC = () => {
     navigate("/login");
   };
 
+  const handleProfileSettings = () => {
+    setIsProfileOpen(false);
+    navigate("/profile");
+  };
+
   if (!user) return null;
+
+  // Format role for display
+  const formatRole = (role: string) => {
+    return role.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  };
 
   return (
     <header className="h-16 bg-[#1a1a1a] border-b border-[#404040] px-6 flex items-center justify-between sticky top-0 z-30">
@@ -36,24 +46,14 @@ export const Topbar: React.FC = () => {
           {/* <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#F59E0B] rounded-full" /> */}
         </button>
 
-        {/* Profile Dropdown */}
+        {/* Profile Icon Dropdown */}
         <div className="relative">
           <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#404040] transition-colors"
+            className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:ring-offset-2 focus:ring-offset-[#1a1a1a]"
+            aria-label="Profile menu"
           >
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-50">{user.name}</p>
-              <p className="text-xs text-gray-400">
-                {user.role.replace(/_/g, " ")}
-              </p>
-            </div>
-            <ChevronDown
-              size={16}
-              className={`text-gray-400 transition-transform duration-200 ${
-                isProfileOpen ? "rotate-180" : ""
-              }`}
-            />
+            <User size={20} className="text-white" />
           </button>
 
           {/* Dropdown Menu */}
@@ -68,25 +68,43 @@ export const Topbar: React.FC = () => {
 
                 {/* Menu */}
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-56 bg-[#1a1a1a] border border-[#404040] rounded-lg shadow-xl overflow-hidden z-20"
+                  className="absolute right-0 mt-2 w-64 bg-[#1a1a1a] border border-[#404040] rounded-lg shadow-xl overflow-hidden z-20"
                 >
-                  <div className="p-3 border-b border-[#404040]">
-                    <p className="text-sm font-medium text-gray-50">
-                      {user.name}
-                    </p>
-                    <p className="text-xs text-gray-400 mt-0.5">{user.email}</p>
+                  {/* User Info Section */}
+                  <div className="p-4 border-b border-[#404040] bg-[#252525]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center">
+                        <User size={24} className="text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-[#F59E0B]">
+                          {formatRole(user.role)}
+                        </p>
+                        <p className="text-xs text-gray-400 truncate mt-0.5">
+                          {user.email}
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Menu Options */}
                   <div className="py-2">
                     <button
-                      onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-200 hover:bg-[#404040] hover:text-gray-50 transition-colors"
+                      onClick={handleProfileSettings}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-200 hover:bg-[#404040] hover:text-gray-50 transition-colors"
                     >
-                      <LogOut size={16} />
+                      <Settings size={16} className="text-gray-400" />
+                      <span>Profile Settings</span>
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-200 hover:bg-[#404040] hover:text-red-400 transition-colors"
+                    >
+                      <LogOut size={16} className="text-gray-400" />
                       <span>Logout</span>
                     </button>
                   </div>
