@@ -1,27 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "../../store/authStore";
 import { getNavigationForRole } from "../../lib/navigation";
 
+// Context for sidebar collapsed state
+interface SidebarContextType {
+  isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
+
+export const useSidebar = () => {
+  const context = useContext(SidebarContext);
+  if (!context) {
+    throw new Error("useSidebar must be used within a SidebarProvider");
+  }
+  return context;
+};
+
+export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  return (
+    <SidebarContext.Provider value={{ isCollapsed, setIsCollapsed }}>
+      {children}
+    </SidebarContext.Provider>
+  );
+};
+
 export const Sidebar: React.FC = () => {
   const { user } = useAuthStore();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { isCollapsed, setIsCollapsed } = useSidebar();
 
   if (!user) return null;
 
   const navItems = getNavigationForRole(user.role);
 
-  const SidebarContent = () => (
-    <div className="h-full flex flex-col bg-[#1a1a1a] border-r border-[#404040]">
+  const SidebarContent = ({ collapsed = false }: { collapsed?: boolean }) => (
+    <div className="h-full flex flex-col bg-[#1a1a1a] border-r border-[#404040] relative">
       {/* Logo */}
-      <div className="h-16 flex items-center px-6 border-b border-[#404040]">
-        <img src="/solx-logo.svg" alt="Sol-X" className="h-8" />
+      <div
+        className={`h-16 flex items-center border-b border-[#404040] ${collapsed ? "justify-center px-2" : "px-6"}`}
+      >
+        {collapsed ? (
+          <img
+            src="/solx-icon.svg"
+            alt="Sol-X"
+            className="h-8 w-8"
+            onError={(e) => {
+              // Fallback to text if icon doesn't exist
+              e.currentTarget.style.display = "none";
+              e.currentTarget.nextElementSibling?.classList.remove("hidden");
+            }}
+          />
+        ) : (
+          <img src="/solx-logo.svg" alt="Sol-X" className="h-8" />
+        )}
+        <span
+          className={`hidden text-[#F59E0B] font-bold text-lg ${collapsed ? "" : "hidden"}`}
+        >
+          S
+        </span>
       </div>
 
+      {/* Collapse Toggle Button - Desktop only */}
+      <button
+        onClick={() => setIsCollapsed(!collapsed)}
+        className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 rounded-full bg-[#1a1a1a] border border-[#404040] items-center justify-center text-gray-400 hover:text-gray-50 hover:bg-[#404040] transition-colors z-10"
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+      >
+        {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+      </button>
+
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+      <nav
+        className={`flex-1 py-6 space-y-1 overflow-y-auto ${collapsed ? "px-2" : "px-4"}`}
+      >
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -29,16 +88,21 @@ export const Sidebar: React.FC = () => {
               key={item.path}
               to={item.path}
               onClick={() => setIsMobileOpen(false)}
+              title={collapsed ? item.label : undefined}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
+                `flex items-center rounded-lg transition-colors duration-200 ${
+                  collapsed ? "justify-center px-2 py-3" : "gap-3 px-4 py-3"
+                } ${
                   isActive
                     ? "bg-[#F59E0B]/10 text-[#F59E0B]"
                     : "text-gray-200 hover:bg-[#404040] hover:text-gray-50"
                 }`
               }
             >
-              <Icon size={20} />
-              <span className="text-sm font-medium">{item.label}</span>
+              <Icon size={20} className="flex-shrink-0" />
+              {!collapsed && (
+                <span className="text-sm font-medium">{item.label}</span>
+              )}
             </NavLink>
           );
         })}
@@ -58,9 +122,14 @@ export const Sidebar: React.FC = () => {
       </button>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-[260px] h-screen sticky top-0">
-        <SidebarContent />
-      </aside>
+      <motion.aside
+        className="hidden lg:block h-screen sticky top-0"
+        initial={false}
+        animate={{ width: isCollapsed ? 72 : 260 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      >
+        <SidebarContent collapsed={isCollapsed} />
+      </motion.aside>
 
       {/* Mobile Sidebar */}
       <AnimatePresence>
@@ -84,7 +153,7 @@ export const Sidebar: React.FC = () => {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] z-50"
             >
-              <SidebarContent />
+              <SidebarContent collapsed={false} />
             </motion.aside>
           </>
         )}
