@@ -252,6 +252,8 @@ const StatCard: React.FC<StatCardProps> = ({
 };
 
 export const AdminDashboard: React.FC = () => {
+  const [isReportDrawerOpen, setIsReportDrawerOpen] = useState(false);
+
   // Mock data - Phase 3 will fetch from API
   const projects = [
     {
@@ -282,6 +284,12 @@ export const AdminDashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Report Drawer */}
+      <ReportDrawer
+        isOpen={isReportDrawerOpen}
+        onClose={() => setIsReportDrawerOpen(false)}
+      />
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -291,9 +299,13 @@ export const AdminDashboard: React.FC = () => {
           </p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" size="md">
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => setIsReportDrawerOpen(true)}
+          >
             <FileText size={18} className="mr-2" />
-            View Reports
+            Generate Report
           </Button>
           <Button variant="primary" size="md">
             <Plus size={18} className="mr-2" />
@@ -379,14 +391,6 @@ export const AdminDashboard: React.FC = () => {
             >
               <FolderKanban size={18} className="mr-2" />
               Manage Projects
-            </Button>
-            <Button
-              variant="secondary"
-              size="md"
-              className="w-full justify-start"
-            >
-              <FileText size={18} className="mr-2" />
-              Generate Report
             </Button>
           </div>
         </div>
