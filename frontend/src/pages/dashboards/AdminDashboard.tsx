@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import {
@@ -8,7 +8,147 @@ import {
   Calendar,
   Plus,
   FileText,
+  X,
 } from "lucide-react";
+
+interface ReportDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ReportDrawer: React.FC<ReportDrawerProps> = ({ isOpen, onClose }) => {
+  const [format, setFormat] = useState<"pdf" | "excel" | null>(null);
+  const [period, setPeriod] = useState<
+    "daily" | "weekly" | "monthly" | "project" | null
+  >(null);
+
+  const handleGenerate = () => {
+    // Phase 3: Implement report generation
+    console.log("Generating report:", { format, period });
+    onClose();
+  };
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+      />
+
+      {/* Drawer */}
+      <div
+        className={`fixed top-0 right-0 h-full w-96 bg-[#1a1a1a] border-l border-[#404040] z-50 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-[#404040]">
+          <h2 className="text-xl font-semibold text-gray-50">
+            Generate Report
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-[#404040] rounded-lg transition-colors"
+          >
+            <X size={20} className="text-gray-400" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 space-y-8">
+          {/* Format Selection */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide">
+              Export Format
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setFormat("pdf")}
+                className={`p-4 rounded-lg border transition-all ${
+                  format === "pdf"
+                    ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
+                    : "border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-gray-500"
+                }`}
+              >
+                <FileText size={24} className="mx-auto mb-2" />
+                <span className="text-sm font-medium">PDF</span>
+              </button>
+              <button
+                onClick={() => setFormat("excel")}
+                className={`p-4 rounded-lg border transition-all ${
+                  format === "excel"
+                    ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
+                    : "border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-gray-500"
+                }`}
+              >
+                <svg
+                  className="w-6 h-6 mx-auto mb-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm2-8h2v1H8v-1zm0 2h2v1H8v-1zm0 2h2v1H8v-1zm4-4h2v1h-2v-1zm0 2h2v1h-2v-1zm0 2h2v1h-2v-1z" />
+                </svg>
+                <span className="text-sm font-medium">Excel</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Period Selection */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide">
+              Report Period
+            </h3>
+            <div className="space-y-3">
+              {[
+                { value: "daily", label: "Daily Report" },
+                { value: "weekly", label: "Weekly Report" },
+                { value: "monthly", label: "Monthly Report" },
+                { value: "project", label: "Project Wise" },
+              ].map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() =>
+                    setPeriod(
+                      option.value as
+                        | "daily"
+                        | "weekly"
+                        | "monthly"
+                        | "project",
+                    )
+                  }
+                  className={`w-full p-4 rounded-lg border text-left transition-all ${
+                    period === option.value
+                      ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
+                      : "border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-gray-500"
+                  }`}
+                >
+                  <span className="text-sm font-medium">{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-[#404040] bg-[#1a1a1a]">
+          <Button
+            variant="primary"
+            size="md"
+            className="w-full"
+            onClick={handleGenerate}
+            disabled={!format || !period}
+          >
+            <FileText size={18} className="mr-2" />
+            Generate Report
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+};
 
 interface ProjectCardProps {
   name: string;
