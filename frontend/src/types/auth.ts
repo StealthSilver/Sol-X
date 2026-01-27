@@ -12,6 +12,15 @@ export type User = {
   role: Role;
 };
 
+export type UpdateProfileRequest = {
+  name?: string;
+};
+
+export type UpdateProfileResponse = {
+  user: User;
+  message: string;
+};
+
 export type LoginRequest = {
   email: string;
   password: string;

@@ -191,3 +191,108 @@ export const verifyToken = async (req: Request, res: Response) => {
     } as ApiResponse);
   }
 };
+
+// Update profile schema
+const updateProfileSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").optional(),
+});
+
+// Update profile controller
+export const updateProfile = async (req: Request, res: Response) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "Authentication required",
+      } as ApiResponse);
+    }
+
+    // Validate request body
+    const validatedData = updateProfileSchema.parse(req.body);
+
+    // Update user in database
+    const updatedUser = await prisma.user.update({
+      where: { id: user.userId },
+      data: {
+        ...(validatedData.name && { name: validatedData.name }),
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        user: updatedUser,
+        message: "Profile updated successfully",
+      },
+    } as ApiResponse);
+  } catch (error) {
+    console.error("Update profile error:", error);
+
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        success: false,
+        error: error.errors[0].message,
+      } as ApiResponse);
+    }
+
+    return res.status(500).json({
+      success: false,
+      error: "An error occurred while updating profile",
+    } as ApiResponse);
+  }
+};
+
+// Get profile controller
+export const getProfile = async (req: Request, res: Response) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "Authentication required",
+      } as ApiResponse);
+    }
+
+    // Get user from database
+    const dbUser = await prisma.user.findUnique({
+      where: { id: user.userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        isActive: true,
+        createdAt: true,
+      },
+    });
+
+    if (!dbUser) {
+      return res.status(404).json({
+        success: false,
+        error: "User not found",
+      } as ApiResponse);
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        user: dbUser,
+      },
+    } as ApiResponse);
+  } catch (error) {
+    console.error("Get profile error:", error);
+    return res.status(500).json({
+      success: false,
+      error: "An error occurred while fetching profile",
+    } as ApiResponse);
+  }
+};
