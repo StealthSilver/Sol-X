@@ -146,7 +146,7 @@ const ProfilePage: React.FC = () => {
       {/* Profile Header Card */}
       <Card padding="lg">
         <div className="flex items-center gap-6">
-          <div className="w-20 h-20 rounded-full bg-[#F59E0B] flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center shadow-lg shadow-[#F59E0B]/10">
             <User size={36} className="text-white" />
           </div>
           <div>
@@ -155,7 +155,7 @@ const ProfilePage: React.FC = () => {
                 type="text"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
-                className="text-xl font-semibold text-gray-50 bg-[#0f0f0f] border border-[#404040] rounded-lg px-3 py-2 focus:outline-none focus:border-[#F59E0B] transition-colors"
+                className="text-xl font-semibold text-gray-50 bg-[#0f0f0f] border border-[#404040] rounded-lg px-4 py-2.5 w-full max-w-xs focus:outline-none focus:border-[#F59E0B]/50 focus:ring-1 focus:ring-[#F59E0B]/20 transition-all duration-200 placeholder:text-gray-500"
                 placeholder="Enter your name"
                 autoFocus
               />
@@ -179,17 +179,34 @@ const ProfilePage: React.FC = () => {
         <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-6">
           Account Information
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {profileFields.map((field) => (
             <div
               key={field.label}
-              className="flex items-center gap-4 p-4 bg-[#0f0f0f] rounded-lg border border-[#404040]"
+              className={`group flex items-center gap-4 p-4 bg-[#0f0f0f] rounded-lg border border-[#404040]/50 transition-all duration-200 ${
+                field.editable && isEditing
+                  ? "border-[#F59E0B]/30 bg-[#F59E0B]/5"
+                  : "hover:border-[#404040] hover:bg-[#0f0f0f]/80"
+              }`}
             >
-              <div className="w-10 h-10 rounded-lg bg-[#404040] flex items-center justify-center">
-                <field.icon size={20} className="text-[#F59E0B]" />
+              <div
+                className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 ${
+                  field.editable && isEditing
+                    ? "bg-[#F59E0B]/20"
+                    : "bg-[#252525] group-hover:bg-[#303030]"
+                }`}
+              >
+                <field.icon
+                  size={18}
+                  className={`transition-colors duration-200 ${
+                    field.editable && isEditing
+                      ? "text-[#F59E0B]"
+                      : "text-gray-400 group-hover:text-gray-300"
+                  }`}
+                />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-gray-400 uppercase tracking-wide">
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
                   {field.label}
                 </p>
                 {field.label === "Full Name" && isEditing ? (
@@ -197,23 +214,25 @@ const ProfilePage: React.FC = () => {
                     type="text"
                     value={editedName}
                     onChange={(e) => setEditedName(e.target.value)}
-                    className="w-full text-sm font-medium text-gray-50 bg-transparent border-b border-[#404040] focus:border-[#F59E0B] outline-none py-1 mt-0.5 transition-colors"
+                    className="w-full text-sm font-medium text-gray-50 bg-[#1a1a1a] border border-[#404040]/50 rounded-md px-3 py-1.5 focus:outline-none focus:border-[#F59E0B]/50 focus:ring-1 focus:ring-[#F59E0B]/20 transition-all duration-200 placeholder:text-gray-500"
                     placeholder="Enter your name"
                   />
                 ) : field.isBadge ? (
                   <span
-                    className={`inline-flex items-center gap-1.5 px-2 py-0.5 mt-1 text-sm font-medium rounded border ${getRoleBadgeColor(user.role)}`}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md border ${getRoleBadgeColor(user.role)}`}
                   >
                     {field.value}
                   </span>
                 ) : (
-                  <p className="text-sm font-medium text-gray-50 truncate mt-0.5">
+                  <p className="text-sm font-medium text-gray-100 truncate">
                     {field.value}
                   </p>
                 )}
               </div>
               {!field.editable && field.label !== "Role" && (
-                <span className="text-xs text-gray-500">Read only</span>
+                <span className="text-[10px] text-gray-600 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Read only
+                </span>
               )}
             </div>
           ))}
@@ -225,28 +244,28 @@ const ProfilePage: React.FC = () => {
         <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-6">
           Account Status
         </h3>
-        <div className="flex items-center gap-4 p-4 bg-[#0f0f0f] rounded-lg border border-[#404040]">
-          <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
-            <div className="w-3 h-3 rounded-full bg-green-400" />
+        <div className="group flex items-center gap-4 p-4 bg-[#0f0f0f] rounded-lg border border-[#404040]/50 hover:border-[#404040] transition-all duration-200">
+          <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+            <div className="w-2.5 h-2.5 rounded-full bg-green-400 shadow-sm shadow-green-400/50" />
           </div>
           <div className="flex-1">
-            <p className="text-xs text-gray-400 uppercase tracking-wide">
+            <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
               Status
             </p>
-            <p className="text-sm font-medium text-green-400 mt-0.5">Active</p>
+            <p className="text-sm font-medium text-green-400">Active</p>
           </div>
         </div>
       </Card>
 
       {/* Security Notice */}
       <Card padding="md">
-        <div className="flex items-start gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
-            <Shield size={16} className="text-[#F59E0B]" />
+        <div className="flex items-start gap-4">
+          <div className="w-9 h-9 rounded-lg bg-[#F59E0B]/5 border border-[#F59E0B]/10 flex items-center justify-center flex-shrink-0">
+            <Shield size={16} className="text-[#F59E0B]/70" />
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-200">Security Notice</p>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-sm font-medium text-gray-300">Security Notice</p>
+            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
               Your account is protected. Contact your administrator if you need
               to update your email or role permissions.
             </p>
