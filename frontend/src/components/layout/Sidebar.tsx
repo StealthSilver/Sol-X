@@ -48,24 +48,10 @@ export const Sidebar: React.FC = () => {
         className={`h-16 flex items-center border-b border-[#404040] ${collapsed ? "justify-center px-2" : "px-6"}`}
       >
         {collapsed ? (
-          <img
-            src="/solx-icon.svg"
-            alt="Sol-X"
-            className="h-8 w-8"
-            onError={(e) => {
-              // Fallback to text if icon doesn't exist
-              e.currentTarget.style.display = "none";
-              e.currentTarget.nextElementSibling?.classList.remove("hidden");
-            }}
-          />
+          <img src="/icon.svg" alt="Sol-X" className="h-8 w-8" />
         ) : (
           <img src="/solx-logo.svg" alt="Sol-X" className="h-8" />
         )}
-        <span
-          className={`hidden text-[#F59E0B] font-bold text-lg ${collapsed ? "" : "hidden"}`}
-        >
-          S
-        </span>
       </div>
 
       {/* Collapse Toggle Button - Desktop only */}

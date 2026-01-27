@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import { useNotificationStore } from "../../store/notificationStore";
+import { useSidebar } from "./Sidebar";
 
 export const Topbar: React.FC = () => {
   const { user, logout } = useAuthStore();
   const { addNotification } = useNotificationStore();
   const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { isCollapsed } = useSidebar();
 
   const handleLogout = () => {
     logout();
@@ -21,7 +23,14 @@ export const Topbar: React.FC = () => {
 
   return (
     <header className="h-16 bg-[#1a1a1a] border-b border-[#404040] px-6 flex items-center justify-between sticky top-0 z-30">
-      {/* Left side - Page title or breadcrumb can go here */}
+      {/* Left side - Logo that changes based on sidebar state */}
+      <div className="flex items-center">
+        <img
+          src={isCollapsed ? "/icon.svg" : "/solx-logo.svg"}
+          alt="Sol-X"
+          className={isCollapsed ? "h-8 w-8" : "h-8"}
+        />
+      </div>
       <div className="flex-1" />
 
       {/* Right side - User actions */}
