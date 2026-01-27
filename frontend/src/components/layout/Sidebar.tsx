@@ -43,18 +43,6 @@ export const Sidebar: React.FC = () => {
           );
         })}
       </nav>
-
-      {/* User Role Badge */}
-      <div className="px-6 py-4 border-t border-[#404040]">
-        <div className="px-3 py-2 rounded-lg bg-[#0f0f0f]">
-          <p className="text-xs text-gray-400 uppercase tracking-wide">
-            Your Role
-          </p>
-          <p className="text-sm text-gray-50 font-medium mt-1">
-            {user.role.replace(/_/g, " ")}
-          </p>
-        </div>
-      </div>
     </div>
   );
 
