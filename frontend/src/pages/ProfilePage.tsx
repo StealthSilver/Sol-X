@@ -1,10 +1,17 @@
-import React from "react";
-import { User, Mail, Shield, Building2 } from "lucide-react";
+import React, { useState } from "react";
+import { User, Mail, Shield, Building2, Edit2, X, Save } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import { useNotificationStore } from "../store/notificationStore";
 import { Card } from "../components/ui/Card";
+import { Button } from "../components/ui/Button";
+import { authApi } from "../api/auth.api";
 
 const ProfilePage: React.FC = () => {
-  const { user } = useAuthStore();
+  const { user, updateUser } = useAuthStore();
+  const { addNotification } = useNotificationStore();
+  const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [editedName, setEditedName] = useState(user?.name || "");
 
   if (!user) return null;
 
@@ -31,40 +38,109 @@ const ProfilePage: React.FC = () => {
     }
   };
 
+  const handleEdit = () => {
+    setEditedName(user.name);
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setEditedName(user.name);
+    setIsEditing(false);
+  };
+
+  const handleSave = async () => {
+    if (!editedName.trim()) {
+      addNotification("error", "Name cannot be empty");
+      return;
+    }
+
+    if (editedName.trim().length < 2) {
+      addNotification("error", "Name must be at least 2 characters");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await authApi.updateProfile({ name: editedName.trim() });
+      updateUser(response.user);
+      addNotification("success", "Profile updated successfully");
+      setIsEditing(false);
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.error || "Failed to update profile";
+      addNotification("error", errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const profileFields = [
     {
       label: "Full Name",
       value: user.name,
       icon: User,
+      editable: true,
     },
     {
       label: "Email Address",
       value: user.email,
       icon: Mail,
+      editable: false,
     },
     {
       label: "Role",
       value: formatRole(user.role),
       icon: Shield,
       isBadge: true,
+      editable: false,
     },
     {
       label: "User ID",
       value: user.id,
       icon: Building2,
+      editable: false,
     },
   ];
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-semibold text-gray-50">
-          Profile Settings
-        </h1>
-        <p className="text-sm text-gray-400 mt-1">
-          View and manage your account information
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-semibold text-gray-50">
+            Profile Settings
+          </h1>
+          <p className="text-sm text-gray-400 mt-1">
+            View and manage your account information
+          </p>
+        </div>
+        {!isEditing ? (
+          <Button variant="secondary" size="md" onClick={handleEdit}>
+            <Edit2 size={16} className="mr-2" />
+            Edit Profile
+          </Button>
+        ) : (
+          <div className="flex items-center gap-3">
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={handleCancel}
+              disabled={isLoading}
+            >
+              <X size={16} className="mr-2" />
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
+              onClick={handleSave}
+              isLoading={isLoading}
+            >
+              <Save size={16} className="mr-2" />
+              Save Changes
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Profile Header Card */}
@@ -74,7 +150,20 @@ const ProfilePage: React.FC = () => {
             <User size={36} className="text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-50">{user.name}</h2>
+            {isEditing ? (
+              <input
+                type="text"
+                value={editedName}
+                onChange={(e) => setEditedName(e.target.value)}
+                className="text-xl font-semibold text-gray-50 bg-[#0f0f0f] border border-[#404040] rounded-lg px-3 py-2 focus:outline-none focus:border-[#F59E0B] transition-colors"
+                placeholder="Enter your name"
+                autoFocus
+              />
+            ) : (
+              <h2 className="text-xl font-semibold text-gray-50">
+                {user.name}
+              </h2>
+            )}
             <span
               className={`inline-flex items-center gap-1.5 px-3 py-1 mt-2 text-xs font-medium rounded-lg border ${getRoleBadgeColor(user.role)}`}
             >
@@ -103,7 +192,15 @@ const ProfilePage: React.FC = () => {
                 <p className="text-xs text-gray-400 uppercase tracking-wide">
                   {field.label}
                 </p>
-                {field.isBadge ? (
+                {field.label === "Full Name" && isEditing ? (
+                  <input
+                    type="text"
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    className="w-full text-sm font-medium text-gray-50 bg-transparent border-b border-[#404040] focus:border-[#F59E0B] outline-none py-1 mt-0.5 transition-colors"
+                    placeholder="Enter your name"
+                  />
+                ) : field.isBadge ? (
                   <span
                     className={`inline-flex items-center gap-1.5 px-2 py-0.5 mt-1 text-sm font-medium rounded border ${getRoleBadgeColor(user.role)}`}
                   >
@@ -115,6 +212,9 @@ const ProfilePage: React.FC = () => {
                   </p>
                 )}
               </div>
+              {!field.editable && field.label !== "Role" && (
+                <span className="text-xs text-gray-500">Read only</span>
+              )}
             </div>
           ))}
         </div>
