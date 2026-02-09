@@ -268,8 +268,13 @@ const StatCard: React.FC<StatCardProps> = ({
 };
 
 export const AdminDashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [isReportDrawerOpen, setIsReportDrawerOpen] = useState(false);
   const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false);
+
+  const handleNavigateToProjectReports = () => {
+    navigate("/reports?tab=project");
+  };
 
   // Mock data - Phase 3 will fetch from API
   const projects = [
@@ -305,6 +310,7 @@ export const AdminDashboard: React.FC = () => {
       <ReportDrawer
         isOpen={isReportDrawerOpen}
         onClose={() => setIsReportDrawerOpen(false)}
+        onNavigateToProjectReports={handleNavigateToProjectReports}
       />
 
       {/* Create Project Drawer */}
