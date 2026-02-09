@@ -32,10 +32,10 @@ export const Input: React.FC<InputProps> = ({
           w-full px-4 py-2.5 rounded-lg
           bg-[#0f0f0f] border border-[#404040]
           text-gray-100 placeholder-gray-500
-          focus:outline-none focus:border-[#F59E0B]
+          focus:outline focus:outline-1 focus:outline-[#F59E0B] focus:outline-offset-0 focus:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
-          ${error ? "border-red-500 focus:border-red-500" : ""}
+          ${error ? "border-red-500 focus:border-red-500 focus:outline-red-500" : ""}
           ${className}
         `}
         {...props}
@@ -80,11 +80,11 @@ export const TextArea: React.FC<TextAreaProps> = ({
           w-full px-4 py-2.5 rounded-lg
           bg-[#0f0f0f] border border-[#404040]
           text-gray-100 placeholder-gray-500
-          focus:outline-none focus:border-[#F59E0B]
+          focus:outline focus:outline-1 focus:outline-[#F59E0B] focus:outline-offset-0 focus:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
           resize-none
-          ${error ? "border-red-500 focus:border-red-500" : ""}
+          ${error ? "border-red-500 focus:border-red-500 focus:outline-red-500" : ""}
           ${className}
         `}
         {...props}
@@ -129,10 +129,10 @@ export const Select: React.FC<SelectProps> = ({
           w-full px-4 py-2.5 rounded-lg
           bg-[#0f0f0f] border border-[#404040]
           text-gray-100
-          focus:outline-none focus:border-[#F59E0B]
+          focus:outline focus:outline-1 focus:outline-[#F59E0B] focus:outline-offset-0 focus:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
-          ${error ? "border-red-500 focus:border-red-500" : ""}
+          ${error ? "border-red-500 focus:border-red-500 focus:outline-red-500" : ""}
           ${className}
         `}
         {...props}
