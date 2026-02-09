@@ -57,3 +57,8 @@ Sol-X provides role-based access and dashboards:
 - Tailwind CSS
 
 ## Project Structure
+
+Sol-X/
+├── backend/ # Express API server with Prisma
+├── frontend/ # React dashboard application
+└── landing/ # Next.js marketing website
