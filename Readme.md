@@ -62,3 +62,15 @@ Sol-X/
 ├── backend/ # Express API server with Prisma
 ├── frontend/ # React dashboard application
 └── landing/ # Next.js marketing website
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies in each directory (`npm install`)
+3. Configure environment variables (see `.env.example` files)
+4. Run database migrations (`npx prisma migrate dev`)
+5. Start development servers
+
+## License
+
+All rights reserved.
