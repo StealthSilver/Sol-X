@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 
 interface DrawerProps {
@@ -17,6 +17,8 @@ export const Drawer: React.FC<DrawerProps> = ({
   width = "md",
 }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const widthClasses = {
     sm: "max-w-sm",
@@ -24,6 +26,26 @@ export const Drawer: React.FC<DrawerProps> = ({
     lg: "max-w-lg",
     xl: "max-w-xl",
   };
+
+  // Handle open/close animations
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+      // Small delay to trigger the animation
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+      });
+    } else {
+      setIsAnimating(false);
+      // Wait for animation to complete before hiding
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
   // Handle escape key
   useEffect(() => {
@@ -49,7 +71,7 @@ export const Drawer: React.FC<DrawerProps> = ({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isVisible) return null;
 
   return (
     <div
@@ -60,7 +82,9 @@ export const Drawer: React.FC<DrawerProps> = ({
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+        className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          isAnimating ? "opacity-100" : "opacity-0"
+        }`}
         onClick={handleBackdropClick}
       />
 
@@ -68,11 +92,16 @@ export const Drawer: React.FC<DrawerProps> = ({
       <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
         <div
           ref={drawerRef}
-          className={`w-screen ${widthClasses[width]} transform transition-transform duration-300 ease-in-out ${
-            isOpen ? "translate-x-0" : "translate-x-full"
+          className={`w-screen ${widthClasses[width]} transform transition-all duration-400 ${
+            isAnimating
+              ? "translate-x-0 opacity-100"
+              : "translate-x-full opacity-0"
           }`}
+          style={{
+            transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
         >
-          <div className="flex h-full flex-col bg-[#1a1a1a] border-l border-[#404040] shadow-xl">
+          <div className="flex h-full flex-col bg-[#1a1a1a] border-l border-[#404040] shadow-2xl shadow-black/50">
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#404040]">
               <h2
