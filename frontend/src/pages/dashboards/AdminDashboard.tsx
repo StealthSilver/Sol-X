@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
+import { CreateProjectDrawer } from "../../components/projects/CreateProjectDrawer";
 import {
   FolderKanban,
   TrendingUp,
@@ -253,6 +254,7 @@ const StatCard: React.FC<StatCardProps> = ({
 
 export const AdminDashboard: React.FC = () => {
   const [isReportDrawerOpen, setIsReportDrawerOpen] = useState(false);
+  const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false);
 
   // Mock data - Phase 3 will fetch from API
   const projects = [
@@ -290,6 +292,16 @@ export const AdminDashboard: React.FC = () => {
         onClose={() => setIsReportDrawerOpen(false)}
       />
 
+      {/* Create Project Drawer */}
+      <CreateProjectDrawer
+        isOpen={isProjectDrawerOpen}
+        onClose={() => setIsProjectDrawerOpen(false)}
+        onSuccess={() => {
+          // Refresh data after project creation
+          console.log("Project created successfully");
+        }}
+      />
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -307,7 +319,11 @@ export const AdminDashboard: React.FC = () => {
             <FileText size={18} className="mr-2" />
             Generate Report
           </Button>
-          <Button variant="primary" size="md">
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => setIsProjectDrawerOpen(true)}
+          >
             <Plus size={18} className="mr-2" />
             Create Project
           </Button>

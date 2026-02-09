@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
+import { CreateProjectDrawer } from "../../components/projects/CreateProjectDrawer";
 import {
   FolderKanban,
   TrendingUp,
@@ -77,6 +78,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 };
 
 export const ProjectManagerDashboard: React.FC = () => {
+  const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false);
+
   // Mock data - Phase 3 will fetch from API
   const projects: ProjectCardProps[] = [
     {
@@ -131,6 +134,15 @@ export const ProjectManagerDashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Create Project Drawer */}
+      <CreateProjectDrawer
+        isOpen={isProjectDrawerOpen}
+        onClose={() => setIsProjectDrawerOpen(false)}
+        onSuccess={() => {
+          console.log("Project created successfully");
+        }}
+      />
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -146,7 +158,11 @@ export const ProjectManagerDashboard: React.FC = () => {
             <FileText size={18} className="mr-2" />
             Generate Report
           </Button>
-          <Button variant="primary" size="md">
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => setIsProjectDrawerOpen(true)}
+          >
             <Plus size={18} className="mr-2" />
             New Project
           </Button>
