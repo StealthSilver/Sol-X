@@ -128,7 +128,7 @@ const RequestAccess: React.FC = () => {
                 {...register("name")}
                 type="text"
                 id="name"
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200"
                 placeholder="John Doe"
               />
               {errors.name && (
@@ -150,7 +150,7 @@ const RequestAccess: React.FC = () => {
                 {...register("email")}
                 type="email"
                 id="email"
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200"
                 placeholder="you@company.com"
               />
               {errors.email && (
@@ -172,7 +172,7 @@ const RequestAccess: React.FC = () => {
                 {...register("company")}
                 type="text"
                 id="company"
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200"
                 placeholder="Your Company"
               />
               {errors.company && (
@@ -194,7 +194,7 @@ const RequestAccess: React.FC = () => {
                 {...register("message")}
                 id="message"
                 rows={4}
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent transition-all duration-200 resize-none"
+                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200 resize-none"
                 placeholder="Tell us why you need access and what role you're interested in..."
               />
               {errors.message && (

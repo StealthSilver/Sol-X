@@ -101,7 +101,7 @@ const ProjectsPage: React.FC = () => {
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0f0f0f] border border-[#404040] text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0f0f0f] border border-[#404040] text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
             />
           </div>
           <Button variant="secondary">

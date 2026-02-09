@@ -155,7 +155,7 @@ const ProfilePage: React.FC = () => {
                 type="text"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
-                className="text-xl font-semibold text-gray-50 bg-[#0f0f0f] border border-[#404040] rounded-lg px-4 py-2.5 w-full max-w-xs focus:outline-none focus:border-[#F59E0B]/50 focus:ring-1 focus:ring-[#F59E0B]/20 transition-all duration-200 placeholder:text-gray-500"
+                className="text-xl font-semibold text-gray-50 bg-[#0f0f0f] border border-[#404040] rounded-lg px-4 py-2.5 w-full max-w-xs focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200 placeholder:text-gray-500"
                 placeholder="Enter your name"
                 autoFocus
               />
@@ -214,7 +214,7 @@ const ProfilePage: React.FC = () => {
                     type="text"
                     value={editedName}
                     onChange={(e) => setEditedName(e.target.value)}
-                    className="w-full text-sm font-medium text-gray-50 bg-[#1a1a1a] border border-[#404040]/50 rounded-md px-3 py-1.5 focus:outline-none focus:border-[#F59E0B]/50 focus:ring-1 focus:ring-[#F59E0B]/20 transition-all duration-200 placeholder:text-gray-500"
+                    className="w-full text-sm font-medium text-gray-50 bg-[#1a1a1a] border border-[#404040]/50 rounded-md px-3 py-1.5 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200 placeholder:text-gray-500"
                     placeholder="Enter your name"
                   />
                 ) : field.isBadge ? (
