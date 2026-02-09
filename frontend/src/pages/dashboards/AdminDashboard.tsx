@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { CreateProjectDrawer } from "../../components/projects/CreateProjectDrawer";
@@ -10,18 +11,24 @@ import {
   Plus,
   FileText,
   X,
+  ExternalLink,
 } from "lucide-react";
 
 interface ReportDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  onNavigateToProjectReports: () => void;
 }
 
-const ReportDrawer: React.FC<ReportDrawerProps> = ({ isOpen, onClose }) => {
+const ReportDrawer: React.FC<ReportDrawerProps> = ({
+  isOpen,
+  onClose,
+  onNavigateToProjectReports,
+}) => {
   const [format, setFormat] = useState<"pdf" | "excel" | null>(null);
-  const [period, setPeriod] = useState<
-    "daily" | "weekly" | "monthly" | "project" | null
-  >(null);
+  const [period, setPeriod] = useState<"daily" | "weekly" | "monthly" | null>(
+    null,
+  );
 
   const handleGenerate = () => {
     // Phase 3: Implement report generation
@@ -107,18 +114,11 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({ isOpen, onClose }) => {
                 { value: "daily", label: "Daily Report" },
                 { value: "weekly", label: "Weekly Report" },
                 { value: "monthly", label: "Monthly Report" },
-                { value: "project", label: "Project Wise" },
               ].map((option) => (
                 <button
                   key={option.value}
                   onClick={() =>
-                    setPeriod(
-                      option.value as
-                        | "daily"
-                        | "weekly"
-                        | "monthly"
-                        | "project",
-                    )
+                    setPeriod(option.value as "daily" | "weekly" | "monthly")
                   }
                   className={`w-full p-4 rounded-lg border text-left transition-all ${
                     period === option.value
@@ -130,6 +130,21 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({ isOpen, onClose }) => {
                 </button>
               ))}
             </div>
+
+            {/* Project Wise Report Link */}
+            <button
+              onClick={() => {
+                onClose();
+                onNavigateToProjectReports();
+              }}
+              className="w-full p-4 rounded-lg border border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all flex items-center justify-between group"
+            >
+              <span className="text-sm font-medium">Project Wise Report</span>
+              <ExternalLink
+                size={16}
+                className="opacity-50 group-hover:opacity-100 transition-opacity"
+              />
+            </button>
           </div>
         </div>
 
