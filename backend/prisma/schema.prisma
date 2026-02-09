@@ -15,6 +15,22 @@ enum Role {
     VIEWER
 }
 
+enum ProjectStatus {
+    PLANNING
+    IN_PROGRESS
+    ON_HOLD
+    COMPLETED
+    CANCELLED
+}
+
+enum ProjectType {
+    SOLAR
+    WIND
+    HYDRO
+    BATTERY_STORAGE
+    HYBRID
+}
+
 model User {
     id           String   @id @default(cuid())
     name         String
@@ -25,7 +41,46 @@ model User {
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
 
+    // Relations
+    managedProjects  Project[]           @relation("ProjectManager")
+    assignedProjects ProjectAssignment[]
+
     @@map("users")
+}
+
+model Project {
+    id          String        @id @default(cuid())
+    name        String
+    description String?       @db.Text
+    type        ProjectType
+    status      ProjectStatus @default(PLANNING)
+    location    String
+    capacity    Float?
+    budget      Float?
+    startDate   DateTime
+    endDate     DateTime?
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+
+    // Relations
+    managerId   String
+    manager     User                @relation("ProjectManager", fields: [managerId], references: [id])
+    assignments ProjectAssignment[]
+
+    @@map("projects")
+}
+
+model ProjectAssignment {
+    id         String   @id @default(cuid())
+    projectId  String
+    userId     String
+    assignedAt DateTime @default(now())
+
+    project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([projectId, userId])
+    @@map("project_assignments")
 }
 
 model AccessRequest {
