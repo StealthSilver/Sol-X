@@ -21,13 +21,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-console.log("✅ Middleware configured");
+console.log(" Middleware configured");
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 
-console.log("✅ Routes configured");
+console.log(" Routes configured");
 
 // Health check
 app.get("/api/health", (req, res) => {

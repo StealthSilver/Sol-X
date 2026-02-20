@@ -65,7 +65,7 @@ Sol-X/
 
 ## Getting Started
 
-1. Clone the repository
+1. Clone the repositoryc
 2. Install dependencies in each directory (`npm install`)
 3. Configure environment variables (see `.env.example` files)
 4. Run database migrations (`npx prisma migrate dev`)
