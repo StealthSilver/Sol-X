@@ -34,6 +34,10 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the Sol-X API");
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
