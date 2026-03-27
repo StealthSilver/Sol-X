@@ -10,11 +10,46 @@ const app = express();
 
 console.log("✅ Modules loaded successfully");
 
-// Middleware
+const defaultAllowedOrigins = [
+  "https://sol-x-main.vercel.app",
+  "https://sol-x.onrender.com",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+];
+
+const envOrigins =
+  process.env.ALLOWED_ORIGINS?.split(",")
+    .map((o) => o.trim())
+    .filter(Boolean) ?? [];
+
+const staticAllowed = new Set([...defaultAllowedOrigins, ...envOrigins]);
+
+function isLocalDevOrigin(origin: string): boolean {
+  try {
+    const u = new URL(origin);
+    return u.protocol === "http:" && (u.hostname === "localhost" || u.hostname === "127.0.0.1");
+  } catch {
+    return false;
+  }
+}
+
+// Middleware — allow local frontends (localhost / 127.0.0.1, any port) against deployed API
 app.use(
   cors({
-    origin: ["https://sol-x-main.vercel.app", "http://localhost:5173"],
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      if (staticAllowed.has(origin) || isLocalDevOrigin(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(null, false);
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
