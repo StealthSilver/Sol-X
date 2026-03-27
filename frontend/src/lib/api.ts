@@ -39,10 +39,17 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid - clear auth state
-      localStorage.removeItem("sol-x-token");
-      localStorage.removeItem("sol-x-user");
-      window.location.href = "/login";
+      const path = String(error.config?.url ?? "");
+      const isPublicAuth =
+        path.includes("/api/auth/login") ||
+        path.includes("/api/auth/request-access");
+      // Let login / request-access show inline errors; avoid hard redirect to /login
+      // (breaks on hosts without SPA fallback, e.g. Vercel without rewrites).
+      if (!isPublicAuth) {
+        localStorage.removeItem("sol-x-token");
+        localStorage.removeItem("sol-x-user");
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   },
