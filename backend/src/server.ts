@@ -12,6 +12,8 @@ console.log("✅ Modules loaded successfully");
 
 const defaultAllowedOrigins = [
   "https://sol-x-main.vercel.app",
+  "https://www.sol-x-main.vercel.app",
+  "https://sol-x-1.onrender.com",
   "https://sol-x.onrender.com",
   "http://localhost:5173",
   "http://127.0.0.1:5173",

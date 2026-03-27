@@ -1,9 +1,14 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+/** Backend mounts routes at /api; accept either host-only or full /api base from env. */
+function resolveApiBaseUrl(): string {
+  const raw = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+  const trimmed = raw.replace(/\/+$/, "");
+  return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+}
 
 const apiClient = axios.create({
-  baseURL: API_URL,
+  baseURL: resolveApiBaseUrl(),
   headers: {
     "Content-Type": "application/json",
   },
