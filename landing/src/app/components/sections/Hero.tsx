@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { GanttVisualization } from "../GanttVisualization";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { APP_LOGIN_URL } from "@/lib/app";
 
 export const HeroSection = () => {
   return (
@@ -57,7 +58,7 @@ export const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a href="https://sol-x-main.vercel.app/">
+              <a href={APP_LOGIN_URL}>
                 <Button variant="hero" size="xl">
                   Get Started
                   <ArrowRight className="ml-1" size={18} />

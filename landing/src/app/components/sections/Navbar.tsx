@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { APP_LOGIN_URL } from "@/lib/app";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -64,7 +65,7 @@ export const Navbar = () => {
 
           {/* Get Started Button - Desktop */}
           <div className="hidden lg:block">
-            <a href="https://sol-x-main.vercel.app">
+            <a href={APP_LOGIN_URL}>
               <Button variant="hero" size="default">
                 Get Started
               </Button>
@@ -113,7 +114,7 @@ export const Navbar = () => {
                   transition={{ duration: 0.2, delay: navLinks.length * 0.05 }}
                   className="pt-4"
                 >
-                  <a href="https://sol-x-main.vercel.app/">
+                  <a href={APP_LOGIN_URL}>
                     <Button variant="hero" size="default" className="w-full">
                       Get Started
                     </Button>

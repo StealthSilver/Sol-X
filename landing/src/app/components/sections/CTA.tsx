@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { APP_LOGIN_URL } from "@/lib/app";
 
 export const CTASection = () => {
   return (
@@ -27,7 +28,7 @@ export const CTASection = () => {
               energy infrastructure projects.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://sol-x-main.vercel.app/">
+              <a href={APP_LOGIN_URL}>
                 <Button variant="hero" size="xl">
                   Get Started
                   <ArrowRight className="ml-1" size={18} />
