@@ -6,6 +6,7 @@ import {
   Settings,
   ClipboardList,
   TrendingUp,
+  BarChart3,
 } from "lucide-react";
 import type { NavigationItem } from "../types/navigation";
 import type { Role } from "../types/auth";
@@ -28,6 +29,18 @@ export const navigationItems: NavigationItem[] = [
     path: "/projects",
     icon: FolderKanban,
     roles: ["MASTER_ADMIN", "ADMIN", "PROJECT_MANAGER"],
+  },
+  {
+    label: "Analytics",
+    path: "/analytics",
+    icon: BarChart3,
+    roles: [
+      "MASTER_ADMIN",
+      "ADMIN",
+      "PROJECT_MANAGER",
+      "SITE_ENGINEER",
+      "VIEWER",
+    ],
   },
   {
     label: "Reports",

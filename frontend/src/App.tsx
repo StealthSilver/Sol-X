@@ -20,6 +20,7 @@ const RoleProtectedRoute = lazy(
 // Dashboard pages
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
 const ReportsPage = lazy(() => import("./pages/ReportsPage"));
 const UsersPage = lazy(() => import("./pages/UsersPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
@@ -88,6 +89,9 @@ function App() {
                 </RoleProtectedRoute>
               }
             />
+
+            {/* Analytics - All authenticated roles */}
+            <Route path="/analytics" element={<AnalyticsPage />} />
 
             {/* Reports - All roles */}
             <Route path="/reports" element={<ReportsPage />} />
