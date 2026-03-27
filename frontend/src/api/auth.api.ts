@@ -13,7 +13,7 @@ export const authApi = {
   // Login
   login: async (credentials: LoginRequest): Promise<LoginResponse> => {
     const response = await apiClient.post<ApiResponse<LoginResponse>>(
-      "/auth/login",
+      "/api/auth/login",
       credentials,
     );
     return response.data.data!;
@@ -21,19 +21,19 @@ export const authApi = {
 
   // Request access
   requestAccess: async (data: AccessRequestData): Promise<void> => {
-    await apiClient.post<ApiResponse>("/auth/request-access", data);
+    await apiClient.post<ApiResponse>("/api/auth/request-access", data);
   },
 
   // Verify token
   verifyToken: async () => {
-    const response = await apiClient.get<ApiResponse>("/auth/verify");
+    const response = await apiClient.get<ApiResponse>("/api/auth/verify");
     return response.data;
   },
 
   // Get profile
   getProfile: async (): Promise<User> => {
     const response =
-      await apiClient.get<ApiResponse<{ user: User }>>("/auth/profile");
+      await apiClient.get<ApiResponse<{ user: User }>>("/api/auth/profile");
     return response.data.data!.user;
   },
 
@@ -42,7 +42,7 @@ export const authApi = {
     data: UpdateProfileRequest,
   ): Promise<UpdateProfileResponse> => {
     const response = await apiClient.put<ApiResponse<UpdateProfileResponse>>(
-      "/auth/profile",
+      "/api/auth/profile",
       data,
     );
     return response.data.data!;

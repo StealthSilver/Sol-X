@@ -1,14 +1,20 @@
 import axios from "axios";
 
-/** Backend mounts routes at /api; accept either host-only or full /api base from env. */
-function resolveApiBaseUrl(): string {
-  const raw = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
-  const trimmed = raw.replace(/\/+$/, "");
-  return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+/**
+ * API host only (no `/api` suffix). Routes call `/api/...` so the final URL is always
+ * `{origin}/api/...` even when `VITE_API_URL` is `https://host` or `https://host/api`.
+ */
+function resolveApiOrigin(): string {
+  const raw = String(import.meta.env.VITE_API_URL ?? "").trim() || "http://localhost:8000";
+  let base = raw.replace(/\/+$/, "");
+  if (base.endsWith("/api")) {
+    base = base.slice(0, -4).replace(/\/+$/, "");
+  }
+  return base;
 }
 
 const apiClient = axios.create({
-  baseURL: resolveApiBaseUrl(),
+  baseURL: resolveApiOrigin(),
   headers: {
     "Content-Type": "application/json",
   },

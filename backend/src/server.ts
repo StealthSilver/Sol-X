@@ -35,6 +35,18 @@ function isLocalDevOrigin(origin: string): boolean {
   }
 }
 
+/** Vercel production + preview URLs (e.g. sol-x-main.vercel.app, sol-x-lrsk.vercel.app). */
+function isSolXVercelOrigin(origin: string): boolean {
+  try {
+    const u = new URL(origin);
+    if (u.protocol !== "https:") return false;
+    const { hostname } = u;
+    return hostname.endsWith(".vercel.app") && hostname.startsWith("sol-x");
+  } catch {
+    return false;
+  }
+}
+
 // Middleware — allow local frontends (localhost / 127.0.0.1, any port) against deployed API
 app.use(
   cors({
@@ -43,7 +55,11 @@ app.use(
         callback(null, true);
         return;
       }
-      if (staticAllowed.has(origin) || isLocalDevOrigin(origin)) {
+      if (
+        staticAllowed.has(origin) ||
+        isLocalDevOrigin(origin) ||
+        isSolXVercelOrigin(origin)
+      ) {
         callback(null, true);
         return;
       }
