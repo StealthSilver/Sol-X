@@ -24,7 +24,28 @@ async function main() {
   console.log("✅ Master Admin created:", masterAdmin.email);
   console.log("📧 Email: rajat.saraswat.0409@gmail.com");
   console.log("🔑 Password: Admin@2026");
-  console.log("\n⚠️  Please change this password in production!");
+
+  // Demo account (used for app testing; production DB must run `prisma db seed` once)
+  const demoHash = await bcrypt.hash("rajat123", 10);
+  const demoUser = await prisma.user.upsert({
+    where: { email: "rajat@gmail.com" },
+    update: {
+      passwordHash: demoHash,
+      isActive: true,
+    },
+    create: {
+      name: "Rajat",
+      email: "rajat@gmail.com",
+      passwordHash: demoHash,
+      role: "ADMIN",
+      isActive: true,
+    },
+  });
+
+  console.log("✅ Demo user:", demoUser.email);
+  console.log("📧 Email: rajat@gmail.com");
+  console.log("🔑 Password: rajat123");
+  console.log("\n⚠️  Please change these passwords in production!");
 }
 
 main()
