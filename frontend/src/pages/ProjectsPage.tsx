@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Plus, Search, Filter, MapPin, Calendar, Zap } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
@@ -10,6 +11,7 @@ import { PROJECT_STATUSES } from "../types/project";
 
 const ProjectsPage: React.FC = () => {
   const { user } = useAuthStore();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -35,6 +37,19 @@ const ProjectsPage: React.FC = () => {
   useEffect(() => {
     fetchProjects();
   }, []);
+
+  useEffect(() => {
+    if (searchParams.get("create") !== "1") return;
+    if (!user) return;
+
+    const next = new URLSearchParams(searchParams);
+    next.delete("create");
+    setSearchParams(next, { replace: true });
+
+    if (canCreateProject) {
+      setIsDrawerOpen(true);
+    }
+  }, [searchParams, setSearchParams, user, canCreateProject]);
 
   const filteredProjects = projects.filter(
     (project) =>

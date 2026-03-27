@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { CreateProjectDrawer } from "../../components/projects/CreateProjectDrawer";
 import {
   FolderKanban,
   TrendingUp,
@@ -270,7 +269,6 @@ const StatCard: React.FC<StatCardProps> = ({
 export const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [isReportDrawerOpen, setIsReportDrawerOpen] = useState(false);
-  const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false);
 
   const handleNavigateToProjectReports = () => {
     navigate("/reports?tab=project");
@@ -313,16 +311,6 @@ export const AdminDashboard: React.FC = () => {
         onNavigateToProjectReports={handleNavigateToProjectReports}
       />
 
-      {/* Create Project Drawer */}
-      <CreateProjectDrawer
-        isOpen={isProjectDrawerOpen}
-        onClose={() => setIsProjectDrawerOpen(false)}
-        onSuccess={() => {
-          // Refresh data after project creation
-          console.log("Project created successfully");
-        }}
-      />
-
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -343,7 +331,7 @@ export const AdminDashboard: React.FC = () => {
           <Button
             variant="primary"
             size="md"
-            onClick={() => setIsProjectDrawerOpen(true)}
+            onClick={() => navigate("/projects?create=1")}
           >
             <Plus size={18} className="mr-2" />
             Create Project
