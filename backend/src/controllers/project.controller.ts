@@ -1,8 +1,26 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import prisma from "../lib/prisma";
+import { isDbConnectionError, logPrismaError } from "../lib/prismaErrors";
+import { routeStringParam } from "../lib/routeParams";
 import { ApiResponse } from "../types/auth.types";
 import { ProjectResponse, ProjectListResponse } from "../types/project.types";
+
+function sendPrismaFailure(
+  res: Response,
+  context: string,
+  error: unknown,
+  defaultMessage: string,
+) {
+  logPrismaError(context, error);
+  const conn = isDbConnectionError(error);
+  return res.status(conn ? 503 : 500).json({
+    success: false,
+    error: conn
+      ? "Database temporarily unavailable. Check DATABASE_URL or try again shortly."
+      : defaultMessage,
+  } as ApiResponse);
+}
 
 // Validation schemas
 const createProjectSchema = z.object({
@@ -111,10 +129,12 @@ export const createProject = async (req: Request, res: Response) => {
       } as ApiResponse);
     }
 
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while creating the project",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "createProject",
+      error,
+      "An error occurred while creating the project",
+    );
   }
 };
 
@@ -175,18 +195,25 @@ export const getProjects = async (req: Request, res: Response) => {
       data: response,
     } as ApiResponse<ProjectListResponse>);
   } catch (error) {
-    console.error("Get projects error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while fetching projects",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "getProjects",
+      error,
+      "An error occurred while fetching projects",
+    );
   }
 };
 
 // Get single project
 export const getProject = async (req: Request, res: Response) => {
   try {
-    const id = req.params.id as string;
+    const id = routeStringParam(req);
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid project id",
+      } as ApiResponse);
+    }
 
     const project = await prisma.project.findUnique({
       where: { id },
@@ -229,18 +256,25 @@ export const getProject = async (req: Request, res: Response) => {
       data: response,
     } as ApiResponse<ProjectResponse>);
   } catch (error) {
-    console.error("Get project error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while fetching the project",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "getProject",
+      error,
+      "An error occurred while fetching the project",
+    );
   }
 };
 
 // Update project
 export const updateProject = async (req: Request, res: Response) => {
   try {
-    const id = req.params.id as string;
+    const id = routeStringParam(req);
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid project id",
+      } as ApiResponse);
+    }
     const validatedData = updateProjectSchema.parse(req.body);
 
     const existingProject = await prisma.project.findUnique({
@@ -306,17 +340,25 @@ export const updateProject = async (req: Request, res: Response) => {
       } as ApiResponse);
     }
 
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while updating the project",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "updateProject",
+      error,
+      "An error occurred while updating the project",
+    );
   }
 };
 
 // Delete project
 export const deleteProject = async (req: Request, res: Response) => {
   try {
-    const id = req.params.id as string;
+    const id = routeStringParam(req);
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid project id",
+      } as ApiResponse);
+    }
 
     const existingProject = await prisma.project.findUnique({
       where: { id },
@@ -338,10 +380,11 @@ export const deleteProject = async (req: Request, res: Response) => {
       data: { message: "Project deleted successfully" },
     } as ApiResponse);
   } catch (error) {
-    console.error("Delete project error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while deleting the project",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "deleteProject",
+      error,
+      "An error occurred while deleting the project",
+    );
   }
 };
