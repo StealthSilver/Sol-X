@@ -38,6 +38,7 @@ model User {
     passwordHash String
     role         Role     @default(VIEWER)
     isActive     Boolean  @default(false)
+    destination  String?
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
 

@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
 import projectRoutes from "./routes/project.routes";
+import userRoutes from "./routes/user.routes";
 
 dotenv.config();
 
@@ -79,6 +80,7 @@ console.log(" Middleware configured");
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/users", userRoutes);
 
 console.log(" Routes configured");
 
