@@ -22,9 +22,9 @@ const Dashboard: React.FC = () => {
       case "SITE_ENGINEER":
         return "bg-yellow-500/10 text-yellow-400 border-yellow-500/50";
       case "VIEWER":
-        return "bg-gray-500/10 text-gray-400 border-gray-500/50";
+        return "bg-gray-500/10 text-zinc-500 dark:text-gray-400 border-gray-500/50";
       default:
-        return "bg-gray-500/10 text-gray-400 border-gray-500/50";
+        return "bg-gray-500/10 text-zinc-500 dark:text-gray-400 border-gray-500/50";
     }
   };
 
@@ -36,15 +36,15 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen bg-zinc-50 dark:bg-[#0f0f0f]">
       {/* Header */}
-      <header className="bg-[#1a1a1a] border-b border-gray-700">
+      <header className="bg-white dark:bg-[#1a1a1a] border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-semibold text-gray-50">Sol-X</h1>
+            <h1 className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">Sol-X</h1>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-gray-100 transition-colors duration-200"
+              className="px-4 py-2 text-sm font-medium text-zinc-600 dark:text-gray-300 hover:text-zinc-800 dark:text-gray-100 transition-colors duration-200"
             >
               Logout
             </button>
@@ -55,13 +55,13 @@ const Dashboard: React.FC = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Welcome Section */}
-        <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg mb-8">
+        <div className="bg-white dark:bg-[#1a1a1a] rounded-lg p-8 shadow-lg mb-8">
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="text-3xl font-semibold text-gray-50 mb-2">
+              <h2 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50 mb-2">
                 Welcome back, {user?.name}!
               </h2>
-              <p className="text-gray-400">
+              <p className="text-zinc-500 dark:text-gray-400">
                 You're logged in with {formatRole(user?.role || "")} access.
               </p>
             </div>
@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
 
         {/* User Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
+          <div className="bg-white dark:bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
             <div className="flex items-center mb-3">
               <svg
                 className="w-5 h-5 text-[#F59E0B] mr-2"
@@ -92,12 +92,12 @@ const Dashboard: React.FC = () => {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              <h3 className="text-sm font-medium text-gray-400">Name</h3>
+              <h3 className="text-sm font-medium text-zinc-500 dark:text-gray-400">Name</h3>
             </div>
-            <p className="text-lg font-semibold text-gray-50">{user?.name}</p>
+            <p className="text-lg font-semibold text-zinc-900 dark:text-gray-50">{user?.name}</p>
           </div>
 
-          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
+          <div className="bg-white dark:bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
             <div className="flex items-center mb-3">
               <svg
                 className="w-5 h-5 text-[#F59E0B] mr-2"
@@ -112,12 +112,12 @@ const Dashboard: React.FC = () => {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              <h3 className="text-sm font-medium text-gray-400">Email</h3>
+              <h3 className="text-sm font-medium text-zinc-500 dark:text-gray-400">Email</h3>
             </div>
-            <p className="text-lg font-semibold text-gray-50">{user?.email}</p>
+            <p className="text-lg font-semibold text-zinc-900 dark:text-gray-50">{user?.email}</p>
           </div>
 
-          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
+          <div className="bg-white dark:bg-[#1a1a1a] rounded-lg p-6 border border-gray-700">
             <div className="flex items-center mb-3">
               <svg
                 className="w-5 h-5 text-[#F59E0B] mr-2"
@@ -132,9 +132,9 @@ const Dashboard: React.FC = () => {
                   d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                 />
               </svg>
-              <h3 className="text-sm font-medium text-gray-400">Role</h3>
+              <h3 className="text-sm font-medium text-zinc-500 dark:text-gray-400">Role</h3>
             </div>
-            <p className="text-lg font-semibold text-gray-50">
+            <p className="text-lg font-semibold text-zinc-900 dark:text-gray-50">
               {formatRole(user?.role || "")}
             </p>
           </div>
@@ -160,7 +160,7 @@ const Dashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-[#10B981] mb-1">
                 Authentication Successful
               </h3>
-              <p className="text-gray-300 text-sm">
+              <p className="text-zinc-600 dark:text-gray-300 text-sm">
                 You have successfully logged in to Sol-X. This is Phase 1 of the
                 authentication system. Additional features and dashboards will
                 be available in future phases.

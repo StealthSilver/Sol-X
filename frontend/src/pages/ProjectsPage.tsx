@@ -93,8 +93,8 @@ const ProjectsPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50">Projects</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">Projects</h1>
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             Manage all construction projects
           </p>
         </div>
@@ -110,13 +110,13 @@ const ProjectsPage: React.FC = () => {
       <Card padding="md">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-900 dark:text-gray-500" />
             <input
               type="text"
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0f0f0f] border border-[#404040] text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] text-zinc-800 dark:text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
             />
           </div>
           <Button variant="secondary">
@@ -143,12 +143,12 @@ const ProjectsPage: React.FC = () => {
         <Card padding="lg">
           <div className="text-center py-12">
             <div className="w-16 h-16 bg-[#404040] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-8 h-8 text-gray-500" />
+              <Zap className="w-8 h-8 text-zinc-900 dark:text-gray-500" />
             </div>
-            <h3 className="text-lg font-medium text-gray-200 mb-2">
+            <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
               No projects found
             </h3>
-            <p className="text-gray-400 mb-6">
+            <p className="text-zinc-500 dark:text-gray-400 mb-6">
               {searchQuery
                 ? "Try adjusting your search query"
                 : "Get started by creating your first project"}
@@ -173,10 +173,10 @@ const ProjectsPage: React.FC = () => {
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-gray-100 truncate">
+                    <h3 className="text-lg font-semibold text-zinc-800 dark:text-gray-100 truncate">
                       {project.name}
                     </h3>
-                    <span className="inline-block mt-1 px-2 py-0.5 text-xs font-medium bg-[#404040] text-gray-300 rounded">
+                    <span className="inline-block mt-1 px-2 py-0.5 text-xs font-medium bg-[#404040] text-zinc-600 dark:text-gray-300 rounded">
                       {project.type.replace("_", " ")}
                     </span>
                   </div>
@@ -185,18 +185,18 @@ const ProjectsPage: React.FC = () => {
 
                 {/* Description */}
                 {project.description && (
-                  <p className="text-sm text-gray-400 line-clamp-2">
+                  <p className="text-sm text-zinc-500 dark:text-gray-400 line-clamp-2">
                     {project.description}
                   </p>
                 )}
 
                 {/* Details */}
                 <div className="space-y-2 text-sm">
-                  <div className="flex items-center text-gray-400">
+                  <div className="flex items-center text-zinc-500 dark:text-gray-400">
                     <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
                     <span className="truncate">{project.location}</span>
                   </div>
-                  <div className="flex items-center text-gray-400">
+                  <div className="flex items-center text-zinc-500 dark:text-gray-400">
                     <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                     <span>
                       {formatDate(project.startDate)}
@@ -206,17 +206,17 @@ const ProjectsPage: React.FC = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-[#404040]">
+                <div className="flex items-center justify-between pt-4 border-t border-zinc-200 dark:border-[#404040]">
                   <div className="text-sm">
-                    <span className="text-gray-500">Budget:</span>
-                    <span className="ml-1 text-gray-300">
+                    <span className="text-zinc-900 dark:text-gray-500">Budget:</span>
+                    <span className="ml-1 text-zinc-600 dark:text-gray-300">
                       {formatCurrency(project.budget)}
                     </span>
                   </div>
                   {project.capacity && (
                     <div className="text-sm">
-                      <span className="text-gray-500">Capacity:</span>
-                      <span className="ml-1 text-gray-300">
+                      <span className="text-zinc-900 dark:text-gray-500">Capacity:</span>
+                      <span className="ml-1 text-zinc-600 dark:text-gray-300">
                         {project.capacity} MW
                       </span>
                     </div>
@@ -228,7 +228,7 @@ const ProjectsPage: React.FC = () => {
                   <div className="w-6 h-6 rounded-full bg-[#F59E0B] flex items-center justify-center text-xs font-medium text-black">
                     {project.manager.name.charAt(0)}
                   </div>
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm text-zinc-500 dark:text-gray-400">
                     {project.manager.name}
                   </span>
                 </div>

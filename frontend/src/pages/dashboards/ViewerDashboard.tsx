@@ -33,13 +33,13 @@ const ReportCard: React.FC<ReportCardProps> = ({
               {type.toUpperCase()}
             </span>
           </div>
-          <h3 className="text-base font-semibold text-gray-50 mb-1">{title}</h3>
-          <p className="text-sm text-gray-400">{projectName}</p>
+          <h3 className="text-base font-semibold text-zinc-900 dark:text-gray-50 mb-1">{title}</h3>
+          <p className="text-sm text-zinc-500 dark:text-gray-400">{projectName}</p>
         </div>
       </div>
 
-      <div className="flex items-center justify-between pt-3 border-t border-[#404040]">
-        <div className="flex items-center gap-2 text-sm text-gray-400">
+      <div className="flex items-center justify-between pt-3 border-t border-zinc-200 dark:border-[#404040]">
+        <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-gray-400">
           <Calendar size={14} />
           <span>{date}</span>
         </div>
@@ -100,8 +100,8 @@ export const ViewerDashboard: React.FC = () => {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-gray-50">Dashboard</h1>
-        <p className="text-sm text-gray-400 mt-1">
+        <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">Dashboard</h1>
+        <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
           View project progress and access reports
         </p>
       </div>
@@ -111,8 +111,8 @@ export const ViewerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Total Projects</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Total Projects</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projectSummary.length}
               </p>
             </div>
@@ -125,8 +125,8 @@ export const ViewerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Active Projects</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Active Projects</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projectSummary.filter((p) => p.status === "Active").length}
               </p>
             </div>
@@ -139,8 +139,8 @@ export const ViewerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Completed</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Completed</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projectSummary.filter((p) => p.status === "Completed").length}
               </p>
             </div>
@@ -153,8 +153,8 @@ export const ViewerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Available Reports</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Available Reports</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {reports.length}
               </p>
             </div>
@@ -170,7 +170,7 @@ export const ViewerDashboard: React.FC = () => {
         {/* Reports List */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-50">
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">
               Recent Reports
             </h2>
             <button className="text-sm text-[#F59E0B] hover:text-[#FCD34D] transition-colors">
@@ -186,7 +186,7 @@ export const ViewerDashboard: React.FC = () => {
 
         {/* Sidebar - Project Summary */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-50">
+          <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">
             Project Overview
           </h2>
           <Card padding="md">
@@ -194,20 +194,20 @@ export const ViewerDashboard: React.FC = () => {
               {projectSummary.map((project, idx) => (
                 <div
                   key={idx}
-                  className="pb-4 border-b border-[#404040] last:border-0 last:pb-0"
+                  className="pb-4 border-b border-zinc-200 dark:border-[#404040] last:border-0 last:pb-0"
                 >
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-sm font-medium text-gray-50">
+                    <h3 className="text-sm font-medium text-zinc-900 dark:text-gray-50">
                       {project.name}
                     </h3>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-zinc-500 dark:text-gray-400">
                       {project.status}
                     </span>
                   </div>
                   <div className="mb-2">
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs text-gray-400">Progress</span>
-                      <span className="text-xs font-medium text-gray-50">
+                      <span className="text-xs text-zinc-500 dark:text-gray-400">Progress</span>
+                      <span className="text-xs font-medium text-zinc-900 dark:text-gray-50">
                         {project.completion}%
                       </span>
                     </div>
@@ -225,7 +225,7 @@ export const ViewerDashboard: React.FC = () => {
 
           {/* Quick Access */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-zinc-500 dark:text-gray-400 uppercase tracking-wide mb-3">
               Quick Access
             </h3>
             <div className="space-y-2">

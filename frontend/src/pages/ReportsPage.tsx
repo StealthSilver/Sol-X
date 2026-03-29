@@ -73,7 +73,7 @@ const ReportsPage: React.FC = () => {
       "on-track": { color: "text-green-500", bg: "bg-green-500/10" },
       delayed: { color: "text-red-500", bg: "bg-red-500/10" },
       completed: { color: "text-[#F59E0B]", bg: "bg-[#F59E0B]/10" },
-    }[status] || { color: "text-gray-500", bg: "bg-gray-500/10" };
+    }[status] || { color: "text-zinc-900 dark:text-gray-500", bg: "bg-gray-500/10" };
 
     return (
       <span
@@ -89,8 +89,8 @@ const ReportsPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50">Reports</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">Reports</h1>
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             View and generate project reports
           </p>
         </div>
@@ -101,7 +101,7 @@ const ReportsPage: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-[#404040] pb-0 overflow-x-auto">
+      <div className="flex gap-2 border-b border-zinc-200 dark:border-[#404040] pb-0 overflow-x-auto">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -109,7 +109,7 @@ const ReportsPage: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap border-b-2 -mb-[2px] ${
               activeTab === tab.id
                 ? "text-[#F59E0B] border-[#F59E0B]"
-                : "text-gray-400 border-transparent hover:text-gray-200"
+                : "text-zinc-500 dark:text-gray-400 border-transparent hover:text-zinc-700 dark:text-gray-200"
             }`}
           >
             <tab.icon size={16} />
@@ -123,10 +123,10 @@ const ReportsPage: React.FC = () => {
         <Card padding="lg">
           <div className="text-center py-12">
             <FileText size={48} className="mx-auto text-gray-600 mb-4" />
-            <h3 className="text-lg font-medium text-gray-200 mb-2">
+            <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
               Reports Overview
             </h3>
-            <p className="text-gray-400">
+            <p className="text-zinc-500 dark:text-gray-400">
               View summary of all reports and analytics
             </p>
           </div>
@@ -139,10 +139,10 @@ const ReportsPage: React.FC = () => {
         <Card padding="lg">
           <div className="text-center py-12">
             <Calendar size={48} className="mx-auto text-gray-600 mb-4" />
-            <h3 className="text-lg font-medium text-gray-200 mb-2">
+            <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
               {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Reports
             </h3>
-            <p className="text-gray-400">
+            <p className="text-zinc-500 dark:text-gray-400">
               {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} report
               generation coming soon
             </p>
@@ -156,13 +156,13 @@ const ReportsPage: React.FC = () => {
           <Card padding="md">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-900 dark:text-gray-500" />
                 <input
                   type="text"
                   placeholder="Search projects..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0f0f0f] border border-[#404040] text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] text-zinc-800 dark:text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
                 />
               </div>
               <Button variant="secondary">
@@ -181,10 +181,10 @@ const ReportsPage: React.FC = () => {
                     size={48}
                     className="mx-auto text-gray-600 mb-4"
                   />
-                  <h3 className="text-lg font-medium text-gray-200 mb-2">
+                  <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
                     No projects found
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-zinc-500 dark:text-gray-400">
                     Try adjusting your search query
                   </p>
                 </div>
@@ -202,10 +202,10 @@ const ReportsPage: React.FC = () => {
                         <FolderKanban size={20} className="text-[#F59E0B]" />
                       </div>
                       <div>
-                        <h3 className="text-base font-semibold text-gray-100">
+                        <h3 className="text-base font-semibold text-zinc-800 dark:text-gray-100">
                           {project.name}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-zinc-900 dark:text-gray-500">
                           Last report: {project.lastReport}
                         </p>
                       </div>

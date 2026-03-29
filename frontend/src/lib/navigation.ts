@@ -74,9 +74,15 @@ export const navigationItems: NavigationItem[] = [
   },
   {
     label: "Settings",
-    path: "/settings",
+    path: "/profile",
     icon: Settings,
-    roles: ["MASTER_ADMIN", "ADMIN"],
+    roles: [
+      "MASTER_ADMIN",
+      "ADMIN",
+      "PROJECT_MANAGER",
+      "SITE_ENGINEER",
+      "VIEWER",
+    ],
   },
 ];
 

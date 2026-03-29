@@ -42,10 +42,10 @@ export const Sidebar: React.FC = () => {
   const navItems = getNavigationForRole(user.role);
 
   const SidebarContent = ({ collapsed = false }: { collapsed?: boolean }) => (
-    <div className="h-full flex flex-col bg-[#1a1a1a] border-r border-[#404040] relative">
+    <div className="relative flex h-full flex-col border-r border-zinc-200 bg-white dark:border-[#404040] dark:bg-[#1a1a1a]">
       {/* Logo */}
       <div
-        className={`h-16 flex items-center border-b border-[#404040] ${collapsed ? "justify-center px-2" : "px-6"}`}
+        className={`flex h-16 items-center border-b border-zinc-200 dark:border-[#404040] ${collapsed ? "justify-center px-2" : "px-6"}`}
       >
         {collapsed ? (
           <img src="/icon.svg" alt="Sol-X" className="h-8 w-8" />
@@ -57,7 +57,7 @@ export const Sidebar: React.FC = () => {
       {/* Collapse Toggle Button - Desktop only */}
       <button
         onClick={() => setIsCollapsed(!collapsed)}
-        className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 rounded-full bg-[#1a1a1a] border border-[#404040] items-center justify-center text-gray-400 hover:text-gray-50 hover:bg-[#404040] transition-colors z-10"
+        className="absolute -right-3 top-20 z-10 hidden h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 lg:flex dark:border-[#404040] dark:bg-[#1a1a1a] dark:text-gray-400 dark:hover:bg-[#404040] dark:hover:text-gray-50"
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
@@ -81,7 +81,7 @@ export const Sidebar: React.FC = () => {
                 } ${
                   isActive
                     ? "bg-[#F59E0B]/10 text-[#F59E0B]"
-                    : "text-gray-200 hover:bg-[#404040] hover:text-gray-50"
+                    : "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:text-gray-200 dark:hover:bg-[#404040] dark:hover:text-gray-50"
                 }`
               }
             >
@@ -101,7 +101,7 @@ export const Sidebar: React.FC = () => {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#1a1a1a] border border-[#404040] text-gray-50"
+        className="fixed left-4 top-4 z-50 rounded-lg border border-zinc-200 bg-white p-2 text-zinc-900 lg:hidden dark:border-[#404040] dark:bg-[#1a1a1a] dark:text-gray-50"
         aria-label="Toggle menu"
       >
         {isMobileOpen ? <X size={20} /> : <Menu size={20} />}

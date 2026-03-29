@@ -32,7 +32,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   };
 
   const statusConfig = {
-    pending: { icon: Clock, color: "text-gray-400" },
+    pending: { icon: Clock, color: "text-zinc-500 dark:text-gray-400" },
     "in-progress": { icon: AlertCircle, color: "text-[#F59E0B]" },
     completed: { icon: CheckCircle2, color: "text-green-500" },
   };
@@ -47,9 +47,9 @@ const TaskItem: React.FC<TaskItemProps> = ({
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <StatusIcon size={16} className={statusStyle.color} />
-            <h3 className="text-base font-semibold text-gray-50">{title}</h3>
+            <h3 className="text-base font-semibold text-zinc-900 dark:text-gray-50">{title}</h3>
           </div>
-          <p className="text-sm text-gray-400">{projectName}</p>
+          <p className="text-sm text-zinc-500 dark:text-gray-400">{projectName}</p>
         </div>
         <div className={`px-2 py-1 rounded ${priorityStyle.bg}`}>
           <span className={`text-xs font-medium ${priorityStyle.color}`}>
@@ -59,7 +59,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
       </div>
 
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm text-gray-400">
+        <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-gray-400">
           <Clock size={14} />
           <span>Due: {dueDate}</span>
         </div>
@@ -132,8 +132,8 @@ export const SiteEngineerDashboard: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50">My Dashboard</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">My Dashboard</h1>
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             Track your assigned tasks and update progress
           </p>
         </div>
@@ -157,8 +157,8 @@ export const SiteEngineerDashboard: React.FC = () => {
             <Card key={idx} padding="md">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400 mb-1">{stat.label}</p>
-                  <p className="text-2xl font-semibold text-gray-50">
+                  <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">{stat.label}</p>
+                  <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                     {stat.value}
                   </p>
                 </div>
@@ -176,15 +176,15 @@ export const SiteEngineerDashboard: React.FC = () => {
         {/* Tasks List */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-50">My Tasks</h2>
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">My Tasks</h2>
             <div className="flex gap-2">
               <button className="px-3 py-1.5 text-xs font-medium bg-[#F59E0B] text-[#0f0f0f] rounded-lg">
                 All
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-gray-400 hover:text-gray-50 hover:bg-[#404040] rounded-lg transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:text-gray-50 hover:bg-zinc-200 dark:hover:bg-[#404040] rounded-lg transition-colors">
                 Pending
               </button>
-              <button className="px-3 py-1.5 text-xs font-medium text-gray-400 hover:text-gray-50 hover:bg-[#404040] rounded-lg transition-colors">
+              <button className="px-3 py-1.5 text-xs font-medium text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:text-gray-50 hover:bg-zinc-200 dark:hover:bg-[#404040] rounded-lg transition-colors">
                 Completed
               </button>
             </div>
@@ -198,7 +198,7 @@ export const SiteEngineerDashboard: React.FC = () => {
 
         {/* Sidebar - Pending Updates */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-50">
+          <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">
             Pending Updates
           </h2>
           <Card padding="md">
@@ -206,15 +206,15 @@ export const SiteEngineerDashboard: React.FC = () => {
               {pendingUpdates.map((item) => (
                 <div
                   key={item.id}
-                  className="pb-4 border-b border-[#404040] last:border-0 last:pb-0"
+                  className="pb-4 border-b border-zinc-200 dark:border-[#404040] last:border-0 last:pb-0"
                 >
                   <div className="flex items-start gap-3">
                     <div className="p-2 bg-[#F59E0B]/10 rounded-lg">
                       <AlertCircle size={16} className="text-[#F59E0B]" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-gray-50">{item.milestone}</p>
-                      <p className="text-xs text-gray-400 mt-1">
+                      <p className="text-sm text-zinc-900 dark:text-gray-50">{item.milestone}</p>
+                      <p className="text-xs text-zinc-500 dark:text-gray-400 mt-1">
                         Update due in {item.days} days
                       </p>
                     </div>
@@ -229,20 +229,20 @@ export const SiteEngineerDashboard: React.FC = () => {
 
           {/* Recent Activity */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-zinc-500 dark:text-gray-400 uppercase tracking-wide mb-3">
               Recent Activity
             </h3>
             <Card padding="md">
               <div className="space-y-3 text-sm">
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-zinc-500 dark:text-gray-400">
                   <div className="w-2 h-2 rounded-full bg-green-500" />
                   <span>Completed safety audit - 2h ago</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-zinc-500 dark:text-gray-400">
                   <div className="w-2 h-2 rounded-full bg-[#F59E0B]" />
                   <span>Updated progress - Site A - 5h ago</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400">
+                <div className="flex items-center gap-2 text-zinc-500 dark:text-gray-400">
                   <div className="w-2 h-2 rounded-full bg-green-500" />
                   <span>Uploaded milestone photo - 1d ago</span>
                 </div>

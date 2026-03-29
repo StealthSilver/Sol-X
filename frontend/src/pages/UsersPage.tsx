@@ -122,8 +122,8 @@ const UsersPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50">Users</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">Users</h1>
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             Members of your organization — roles, access, and project
             assignments
           </p>
@@ -136,13 +136,13 @@ const UsersPage: React.FC = () => {
 
       <Card padding="md">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-900 dark:text-gray-500" />
           <input
             type="text"
             placeholder="Search by name, email, role, destination, or project..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#0f0f0f] border border-[#404040] text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
+            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] text-zinc-800 dark:text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
           />
         </div>
       </Card>
@@ -159,12 +159,12 @@ const UsersPage: React.FC = () => {
         <Card padding="lg">
           <div className="text-center py-12">
             <div className="w-16 h-16 bg-[#404040] rounded-full flex items-center justify-center mx-auto mb-4">
-              <UsersIcon className="w-8 h-8 text-gray-500" />
+              <UsersIcon className="w-8 h-8 text-zinc-900 dark:text-gray-500" />
             </div>
-            <h3 className="text-lg font-medium text-gray-200 mb-2">
+            <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
               {searchQuery ? "No users match your search" : "No users yet"}
             </h3>
-            <p className="text-gray-400 mb-6">
+            <p className="text-zinc-500 dark:text-gray-400 mb-6">
               {searchQuery
                 ? "Try a different search term"
                 : "Add team members to get started"}
@@ -182,17 +182,17 @@ const UsersPage: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-[#404040] bg-[#141414]">
-                  <th className="px-4 py-3 font-medium text-gray-400">Name</th>
-                  <th className="px-4 py-3 font-medium text-gray-400">Email</th>
-                  <th className="px-4 py-3 font-medium text-gray-400">Role</th>
-                  <th className="px-4 py-3 font-medium text-gray-400 min-w-[180px]">
+                <tr className="border-b border-zinc-200 dark:border-[#404040] bg-[#141414]">
+                  <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400">Name</th>
+                  <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400">Email</th>
+                  <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400">Role</th>
+                  <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400 min-w-[180px]">
                     Projects assigned
                   </th>
-                  <th className="px-4 py-3 font-medium text-gray-400 min-w-[120px]">
+                  <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400 min-w-[120px]">
                     Destination
                   </th>
-                  <th className="px-4 py-3 font-medium text-gray-400 text-right w-[140px]">
+                  <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400 text-right w-[140px]">
                     Actions
                   </th>
                 </tr>
@@ -205,26 +205,26 @@ const UsersPage: React.FC = () => {
                   >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-gray-100">
+                        <span className="font-medium text-zinc-800 dark:text-gray-100">
                           {u.name}
                         </span>
                         {!u.isActive && (
-                          <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-gray-700 text-gray-300">
+                          <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-gray-700 text-zinc-600 dark:text-gray-300">
                             Inactive
                           </span>
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-gray-300">{u.email}</td>
-                    <td className="px-4 py-3 text-gray-300">
+                    <td className="px-4 py-3 text-zinc-600 dark:text-gray-300">{u.email}</td>
+                    <td className="px-4 py-3 text-zinc-600 dark:text-gray-300">
                       {orgRoleLabel(u.role)}
                     </td>
-                    <td className="px-4 py-3 text-gray-400 max-w-xs">
+                    <td className="px-4 py-3 text-zinc-500 dark:text-gray-400 max-w-xs">
                       <span className="line-clamp-2" title={projectsLabel(u)}>
                         {projectsLabel(u)}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-gray-400 max-w-[160px]">
+                    <td className="px-4 py-3 text-zinc-500 dark:text-gray-400 max-w-[160px]">
                       <span className="line-clamp-2" title={u.destination ?? ""}>
                         {u.destination?.trim() ? u.destination : "—"}
                       </span>
@@ -234,7 +234,7 @@ const UsersPage: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => openEdit(u)}
-                          className="p-2 rounded-lg text-gray-400 hover:text-[#F59E0B] hover:bg-[#F59E0B]/10 transition-colors"
+                          className="p-2 rounded-lg text-zinc-500 dark:text-gray-400 hover:text-[#F59E0B] hover:bg-[#F59E0B]/10 transition-colors"
                           aria-label={`Edit ${u.name}`}
                         >
                           <Pencil className="w-4 h-4" />
@@ -243,7 +243,7 @@ const UsersPage: React.FC = () => {
                           type="button"
                           onClick={() => setDeleteTarget(u)}
                           disabled={u.id === currentUser?.id}
-                          className="p-2 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                          className="p-2 rounded-lg text-zinc-500 dark:text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-30 disabled:pointer-events-none"
                           aria-label={`Delete ${u.name}`}
                         >
                           <Trash2 className="w-4 h-4" />
@@ -277,15 +277,15 @@ const UsersPage: React.FC = () => {
           aria-modal="true"
           aria-labelledby="delete-user-title"
         >
-          <Card padding="lg" className="max-w-md w-full border-[#404040]">
+          <Card padding="lg" className="max-w-md w-full border-zinc-200 dark:border-[#404040]">
             <h2
               id="delete-user-title"
-              className="text-lg font-semibold text-gray-50 mb-2"
+              className="text-lg font-semibold text-zinc-900 dark:text-gray-50 mb-2"
             >
               Delete user
             </h2>
-            <p className="text-sm text-gray-400 mb-6">
-              Remove <span className="text-gray-200">{deleteTarget.name}</span>{" "}
+            <p className="text-sm text-zinc-500 dark:text-gray-400 mb-6">
+              Remove <span className="text-zinc-700 dark:text-gray-200">{deleteTarget.name}</span>{" "}
               ({deleteTarget.email})? This cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">

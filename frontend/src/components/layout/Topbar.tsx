@@ -30,7 +30,7 @@ export const Topbar: React.FC = () => {
   };
 
   return (
-    <header className="h-16 bg-[#1a1a1a] border-b border-[#404040] px-6 flex items-center justify-between sticky top-0 z-30">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-zinc-200 bg-white px-6 dark:border-[#404040] dark:bg-[#1a1a1a]">
       {/* Left side - spacer */}
       <div className="flex-1" />
 
@@ -38,7 +38,7 @@ export const Topbar: React.FC = () => {
       <div className="flex items-center gap-4">
         {/* Notifications (future-proof) */}
         <button
-          className="p-2 rounded-lg text-gray-400 hover:text-gray-50 hover:bg-[#404040] transition-colors relative"
+          className="relative rounded-lg p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-gray-400 dark:hover:bg-[#404040] dark:hover:text-gray-50"
           aria-label="Notifications"
         >
           <Bell size={20} />
@@ -50,7 +50,7 @@ export const Topbar: React.FC = () => {
         <div className="relative">
           <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:ring-offset-2 focus:ring-offset-[#1a1a1a]"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-[#1a1a1a]"
             aria-label="Profile menu"
           >
             <User size={20} className="text-white" />
@@ -72,10 +72,10 @@ export const Topbar: React.FC = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-64 bg-[#1a1a1a] border border-[#404040] rounded-lg shadow-xl overflow-hidden z-20"
+                  className="absolute right-0 z-20 mt-2 w-64 overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-xl dark:border-[#404040] dark:bg-[#1a1a1a]"
                 >
                   {/* User Info Section */}
-                  <div className="p-4 border-b border-[#404040] bg-[#252525]">
+                  <div className="border-b border-zinc-200 bg-zinc-50 p-4 dark:border-[#404040] dark:bg-[#252525]">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center">
                         <User size={24} className="text-white" />
@@ -84,7 +84,7 @@ export const Topbar: React.FC = () => {
                         <p className="text-sm font-semibold text-[#F59E0B]">
                           {formatRole(user.role)}
                         </p>
-                        <p className="text-xs text-gray-400 truncate mt-0.5">
+                        <p className="mt-0.5 truncate text-xs text-zinc-600 dark:text-gray-400">
                           {user.email}
                         </p>
                       </div>
@@ -95,16 +95,16 @@ export const Topbar: React.FC = () => {
                   <div className="py-2">
                     <button
                       onClick={handleProfileSettings}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-200 hover:bg-[#404040] hover:text-gray-50 transition-colors"
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-zinc-800 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-gray-200 dark:hover:bg-[#404040] dark:hover:text-gray-50"
                     >
-                      <Settings size={16} className="text-gray-400" />
+                      <Settings size={16} className="text-zinc-500 dark:text-gray-400" />
                       <span>Profile Settings</span>
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-200 hover:bg-[#404040] hover:text-red-400 transition-colors"
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-zinc-800 transition-colors hover:bg-zinc-100 hover:text-red-600 dark:text-gray-200 dark:hover:bg-[#404040] dark:hover:text-red-400"
                     >
-                      <LogOut size={16} className="text-gray-400" />
+                      <LogOut size={16} className="text-zinc-500 dark:text-gray-400" />
                       <span>Logout</span>
                     </button>
                   </div>

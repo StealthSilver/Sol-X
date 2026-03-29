@@ -101,18 +101,18 @@ export const Drawer: React.FC<DrawerProps> = ({
             transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
-          <div className="flex h-full flex-col bg-[#1a1a1a] border-l border-[#404040] shadow-2xl shadow-black/50">
+          <div className="flex h-full flex-col bg-white dark:bg-[#1a1a1a] border-l border-zinc-200 dark:border-[#404040] shadow-2xl shadow-black/50">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#404040]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-[#404040]">
               <h2
                 id="drawer-title"
-                className="text-xl font-semibold text-gray-50"
+                className="text-xl font-semibold text-zinc-900 dark:text-gray-50"
               >
                 {title}
               </h2>
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-[#404040] transition-colors"
+                className="p-2 rounded-lg text-zinc-500 dark:text-gray-400 hover:text-zinc-700 dark:text-gray-200 hover:bg-zinc-200 dark:hover:bg-[#404040] transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>

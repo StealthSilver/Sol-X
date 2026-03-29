@@ -39,8 +39,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <Card padding="md">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-50 mb-2">{name}</h3>
-          <div className="flex items-center gap-4 text-xs text-gray-400">
+          <h3 className="text-lg font-semibold text-zinc-900 dark:text-gray-50 mb-2">{name}</h3>
+          <div className="flex items-center gap-4 text-xs text-zinc-500 dark:text-gray-400">
             <div className="flex items-center gap-1">
               <Calendar size={12} />
               <span>Due: {deadline}</span>
@@ -61,8 +61,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Progress Bar */}
       <div>
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-gray-400">Progress</span>
-          <span className="text-sm font-medium text-gray-50">
+          <span className="text-sm text-zinc-500 dark:text-gray-400">Progress</span>
+          <span className="text-sm font-medium text-zinc-900 dark:text-gray-50">
             {completion}%
           </span>
         </div>
@@ -137,10 +137,10 @@ export const ProjectManagerDashboard: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">
             Project Manager Dashboard
           </h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             Manage projects, track team progress, and generate reports
           </p>
         </div>
@@ -165,8 +165,8 @@ export const ProjectManagerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Active Projects</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Active Projects</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projects.filter((p) => p.status !== "completed").length}
               </p>
             </div>
@@ -179,8 +179,8 @@ export const ProjectManagerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Team Members</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Team Members</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projects.reduce((sum, p) => sum + p.teamSize, 0)}
               </p>
             </div>
@@ -193,8 +193,8 @@ export const ProjectManagerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">On Track</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">On Track</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projects.filter((p) => p.status === "on-track").length}
               </p>
             </div>
@@ -207,8 +207,8 @@ export const ProjectManagerDashboard: React.FC = () => {
         <Card padding="md">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Delayed</p>
-              <p className="text-2xl font-semibold text-gray-50">
+              <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">Delayed</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">
                 {projects.filter((p) => p.status === "delayed").length}
               </p>
             </div>
@@ -224,7 +224,7 @@ export const ProjectManagerDashboard: React.FC = () => {
         {/* Projects List */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-50">My Projects</h2>
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">My Projects</h2>
             <button className="text-sm text-[#F59E0B] hover:text-[#FCD34D] transition-colors">
               View All →
             </button>
@@ -240,7 +240,7 @@ export const ProjectManagerDashboard: React.FC = () => {
         <div className="space-y-6">
           {/* Upcoming Milestones */}
           <div>
-            <h2 className="text-xl font-semibold text-gray-50 mb-4">
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50 mb-4">
               Upcoming Milestones
             </h2>
             <Card padding="md">
@@ -248,17 +248,17 @@ export const ProjectManagerDashboard: React.FC = () => {
                 {upcomingMilestones.map((item) => (
                   <div
                     key={item.id}
-                    className="pb-4 border-b border-[#404040] last:border-0 last:pb-0"
+                    className="pb-4 border-b border-zinc-200 dark:border-[#404040] last:border-0 last:pb-0"
                   >
                     <div className="flex items-start gap-3">
                       <div className="p-2 bg-[#F59E0B]/10 rounded-lg">
                         <Calendar size={16} className="text-[#F59E0B]" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-50">
+                        <p className="text-sm font-medium text-zinc-900 dark:text-gray-50">
                           {item.milestone}
                         </p>
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="text-xs text-zinc-500 dark:text-gray-400 mt-1">
                           {item.project}
                         </p>
                         <p className="text-xs text-[#F59E0B] mt-1">
@@ -274,7 +274,7 @@ export const ProjectManagerDashboard: React.FC = () => {
 
           {/* Team Activity */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-zinc-500 dark:text-gray-400 uppercase tracking-wide mb-3">
               Recent Team Activity
             </h3>
             <Card padding="md">
@@ -290,11 +290,11 @@ export const ProjectManagerDashboard: React.FC = () => {
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-gray-50">{activity.name}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">
+                      <p className="text-sm text-zinc-900 dark:text-gray-50">{activity.name}</p>
+                      <p className="text-xs text-zinc-500 dark:text-gray-400 mt-0.5">
                         {activity.action}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-xs text-zinc-900 dark:text-gray-500 mt-0.5">
                         {activity.time}
                       </p>
                     </div>

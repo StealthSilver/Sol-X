@@ -19,8 +19,8 @@ const ROLE_OPTIONS_BASE: { value: Role; label: string }[] = [
 
 const selectLikeClass = `
   w-full px-4 py-2.5 rounded-lg
-  bg-[#0f0f0f] border border-[#404040]
-  text-gray-100
+  bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
+  text-zinc-800 dark:text-gray-100
   focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
   disabled:opacity-50 disabled:cursor-not-allowed
   transition-colors duration-200
@@ -228,11 +228,11 @@ export const UserFormDrawer: React.FC<UserFormDrawerProps> = ({
         <div className="space-y-1.5">
           <label
             htmlFor="projects-assigned"
-            className="block text-sm font-medium text-gray-300"
+            className="block text-sm font-medium text-zinc-600 dark:text-gray-300"
           >
             Projects assigned
           </label>
-          <p className="text-xs text-gray-500 -mt-0.5 mb-1">
+          <p className="text-xs text-zinc-900 dark:text-gray-500 -mt-0.5 mb-1">
             Hold Ctrl (Windows) or Cmd (Mac) to select multiple projects
           </p>
           <select
@@ -249,7 +249,7 @@ export const UserFormDrawer: React.FC<UserFormDrawerProps> = ({
               </option>
             ) : (
               projects.map((p) => (
-                <option key={p.id} value={p.id} className="bg-[#0f0f0f] py-1">
+                <option key={p.id} value={p.id} className="bg-zinc-50 dark:bg-[#0f0f0f] py-1">
                   {p.name}
                 </option>
               ))

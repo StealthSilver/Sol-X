@@ -408,7 +408,7 @@ const AnalyticsPage: React.FC = () => {
       label: "Total projects",
       value: stats.total,
       icon: FolderKanban,
-      accentClass: "text-gray-200",
+      accentClass: "text-zinc-700 dark:text-gray-200",
       iconBg: "bg-[#404040]/60",
     },
     {
@@ -440,16 +440,16 @@ const AnalyticsPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50 flex items-center gap-2">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50 flex items-center gap-2">
             <BarChart3 className="w-8 h-8 text-[#F59E0B]" />
             Analytics
           </h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             Organization-wide project insights — updates every{" "}
             {POLL_MS / 1000}s and when you return to this tab
           </p>
           {lastUpdated && (
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-zinc-900 dark:text-gray-500 mt-2">
               Last synced {format(lastUpdated, "MMM d, yyyy · h:mm:ss a")}
               {refreshing && (
                 <span className="ml-2 text-[#F59E0B]">Refreshing…</span>
@@ -484,12 +484,12 @@ const AnalyticsPage: React.FC = () => {
             <Card key={s.label} padding="md" className="relative overflow-hidden">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm text-gray-500">{s.label}</p>
-                  <p className="text-3xl font-semibold text-gray-50 mt-1 tabular-nums">
+                  <p className="text-sm text-zinc-900 dark:text-gray-500">{s.label}</p>
+                  <p className="text-3xl font-semibold text-zinc-900 dark:text-gray-50 mt-1 tabular-nums">
                     {loading ? "—" : s.value}
                   </p>
                   {s.sub && (
-                    <p className="text-xs text-gray-500 mt-1">{s.sub}</p>
+                    <p className="text-xs text-zinc-900 dark:text-gray-500 mt-1">{s.sub}</p>
                   )}
                 </div>
                 <div
@@ -504,9 +504,9 @@ const AnalyticsPage: React.FC = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <p className="text-sm text-gray-500">View</p>
+        <p className="text-sm text-zinc-900 dark:text-gray-500">View</p>
         <div
-          className="inline-flex p-1 rounded-xl bg-[#0f0f0f] border border-[#404040] w-full sm:w-auto"
+          className="inline-flex p-1 rounded-xl bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] w-full sm:w-auto"
           role="tablist"
         >
           <button
@@ -517,7 +517,7 @@ const AnalyticsPage: React.FC = () => {
             className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
               tab === "overview"
                 ? "bg-[#F59E0B]/15 text-[#F59E0B] shadow-sm"
-                : "text-gray-400 hover:text-gray-200"
+                : "text-zinc-500 dark:text-gray-400 hover:text-zinc-700 dark:text-gray-200"
             }`}
           >
             <LayoutGrid className="w-4 h-4" />
@@ -531,7 +531,7 @@ const AnalyticsPage: React.FC = () => {
             className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
               tab === "timeline"
                 ? "bg-[#F59E0B]/15 text-[#F59E0B] shadow-sm"
-                : "text-gray-400 hover:text-gray-200"
+                : "text-zinc-500 dark:text-gray-400 hover:text-zinc-700 dark:text-gray-200"
             }`}
           >
             <SquareChartGantt className="w-4 h-4" />
@@ -543,15 +543,15 @@ const AnalyticsPage: React.FC = () => {
       {tab === "overview" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card padding="lg">
-            <h2 className="text-lg font-medium text-gray-100 mb-1">
+            <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Status distribution
             </h2>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
               How projects are spread across lifecycle stages
             </p>
             <div className="h-[280px] flex items-center justify-center">
               {!loading && projects.length === 0 ? (
-                <p className="text-sm text-gray-500">No project data yet</p>
+                <p className="text-sm text-zinc-900 dark:text-gray-500">No project data yet</p>
               ) : (
                 <Doughnut
                   key={`status-${chartKey}`}
@@ -563,15 +563,15 @@ const AnalyticsPage: React.FC = () => {
           </Card>
 
           <Card padding="lg">
-            <h2 className="text-lg font-medium text-gray-100 mb-1">
+            <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Projects by energy type
             </h2>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
               Count of active portfolio mix
             </p>
             <div className="h-[280px]">
               {!loading && projects.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
                   No project data yet
                 </div>
               ) : (
@@ -585,15 +585,15 @@ const AnalyticsPage: React.FC = () => {
           </Card>
 
           <Card padding="lg">
-            <h2 className="text-lg font-medium text-gray-100 mb-1">
+            <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               New projects (12 months)
             </h2>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
               Created date trend for planning load
             </p>
             <div className="h-[260px]">
               {!loading && projects.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
                   No project data yet
                 </div>
               ) : (
@@ -607,15 +607,15 @@ const AnalyticsPage: React.FC = () => {
           </Card>
 
           <Card padding="lg">
-            <h2 className="text-lg font-medium text-gray-100 mb-1">
+            <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Top budgets
             </h2>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
               Up to ten largest budget allocations
             </p>
             <div className="h-[280px]">
               {!loading && budgetChartData.labels.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
                   No budget figures recorded
                 </div>
               ) : (
@@ -629,15 +629,15 @@ const AnalyticsPage: React.FC = () => {
           </Card>
 
           <Card padding="lg" className="lg:col-span-2">
-            <h2 className="text-lg font-medium text-gray-100 mb-1">
+            <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Installed capacity by type
             </h2>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
               Sum of capacity (MW) where specified
             </p>
             <div className="h-[240px]">
               {!loading && capacityByTypeData.labels.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
                   No capacity data recorded
                 </div>
               ) : (
@@ -654,10 +654,10 @@ const AnalyticsPage: React.FC = () => {
 
       {tab === "timeline" && (
         <Card padding="lg">
-          <h2 className="text-lg font-medium text-gray-100 mb-1">
+          <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
             Project timeline (Gantt)
           </h2>
-          <p className="text-xs text-gray-500 mb-4">
+          <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
             Start and end dates; open-ended projects run to today. Colors match
             status.
           </p>
@@ -668,7 +668,7 @@ const AnalyticsPage: React.FC = () => {
             }}
           >
             {!loading && projects.length === 0 ? (
-              <div className="h-[200px] flex items-center justify-center text-sm text-gray-500">
+              <div className="h-[200px] flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
                 No project data yet
               </div>
             ) : (

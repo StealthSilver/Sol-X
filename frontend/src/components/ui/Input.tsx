@@ -21,7 +21,7 @@ export const Input: React.FC<InputProps> = ({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-gray-300"
+          className="block text-sm font-medium text-zinc-600 dark:text-gray-300"
         >
           {label}
         </label>
@@ -30,8 +30,8 @@ export const Input: React.FC<InputProps> = ({
         id={inputId}
         className={`
           w-full px-4 py-2.5 rounded-lg
-          bg-[#0f0f0f] border border-[#404040]
-          text-gray-100 placeholder-gray-500
+          bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
+          text-zinc-800 dark:text-gray-100 placeholder-gray-500
           focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
@@ -42,7 +42,7 @@ export const Input: React.FC<InputProps> = ({
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {helperText && !error && (
-        <p className="text-sm text-gray-500">{helperText}</p>
+        <p className="text-sm text-zinc-600 dark:text-gray-500">{helperText}</p>
       )}
     </div>
   );
@@ -69,7 +69,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-gray-300"
+          className="block text-sm font-medium text-zinc-600 dark:text-gray-300"
         >
           {label}
         </label>
@@ -78,8 +78,8 @@ export const TextArea: React.FC<TextAreaProps> = ({
         id={inputId}
         className={`
           w-full px-4 py-2.5 rounded-lg
-          bg-[#0f0f0f] border border-[#404040]
-          text-gray-100 placeholder-gray-500
+          bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
+          text-zinc-800 dark:text-gray-100 placeholder-gray-500
           focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
@@ -91,7 +91,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {helperText && !error && (
-        <p className="text-sm text-gray-500">{helperText}</p>
+        <p className="text-sm text-zinc-600 dark:text-gray-500">{helperText}</p>
       )}
     </div>
   );
@@ -118,7 +118,7 @@ export const Select: React.FC<SelectProps> = ({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-gray-300"
+          className="block text-sm font-medium text-zinc-600 dark:text-gray-300"
         >
           {label}
         </label>
@@ -127,8 +127,8 @@ export const Select: React.FC<SelectProps> = ({
         id={inputId}
         className={`
           w-full px-4 py-2.5 rounded-lg
-          bg-[#0f0f0f] border border-[#404040]
-          text-gray-100
+          bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
+          text-zinc-800 dark:text-gray-100
           focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200

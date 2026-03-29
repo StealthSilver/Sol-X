@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import { AppLayout } from "./components/layout/AppLayout";
+import { ThemeSync } from "./components/layout/ThemeSync";
 
 // Lazy load components
 const Login = lazy(() => import("./pages/Login"));
@@ -23,23 +24,13 @@ const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
 const ReportsPage = lazy(() => import("./pages/ReportsPage"));
 const UsersPage = lazy(() => import("./pages/UsersPage"));
-const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const TasksPage = lazy(() => import("./pages/TasksPage"));
 const ProgressPage = lazy(() => import("./pages/ProgressPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 
 // Loading fallback
 const LoadingSpinner = () => (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-      backgroundColor: "#0f0f0f",
-      color: "#FAFAFA",
-    }}
-  >
+  <div className="flex min-h-screen items-center justify-center bg-zinc-100 text-zinc-900 dark:bg-[#0f0f0f] dark:text-[#FAFAFA]">
     <div style={{ textAlign: "center" }}>
       <div
         style={{
@@ -60,6 +51,7 @@ const LoadingSpinner = () => (
 function App() {
   return (
     <Router>
+      <ThemeSync />
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           {/* Public Routes */}
@@ -126,15 +118,8 @@ function App() {
               }
             />
 
-            {/* Settings - Admin only */}
-            <Route
-              path="/settings"
-              element={
-                <RoleProtectedRoute allowedRoles={["MASTER_ADMIN", "ADMIN"]}>
-                  <SettingsPage />
-                </RoleProtectedRoute>
-              }
-            />
+            {/* Legacy / admin bookmarks → profile settings */}
+            <Route path="/settings" element={<Navigate to="/profile" replace />} />
 
             {/* Profile - All authenticated users */}
             <Route path="/profile" element={<ProfilePage />} />

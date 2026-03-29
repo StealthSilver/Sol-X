@@ -47,20 +47,20 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-96 bg-[#1a1a1a] border-l border-[#404040] z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-96 bg-white dark:bg-[#1a1a1a] border-l border-zinc-200 dark:border-[#404040] z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#404040]">
-          <h2 className="text-xl font-semibold text-gray-50">
+        <div className="flex items-center justify-between p-6 border-b border-zinc-200 dark:border-[#404040]">
+          <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">
             Generate Report
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-[#404040] rounded-lg transition-colors"
+            className="p-2 hover:bg-zinc-200 dark:hover:bg-[#404040] rounded-lg transition-colors"
           >
-            <X size={20} className="text-gray-400" />
+            <X size={20} className="text-zinc-500 dark:text-gray-400" />
           </button>
         </div>
 
@@ -68,7 +68,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
         <div className="p-6 space-y-8">
           {/* Format Selection */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide">
+            <h3 className="text-sm font-semibold text-zinc-500 dark:text-gray-400 uppercase tracking-wide">
               Export Format
             </h3>
             <div className="grid grid-cols-2 gap-3">
@@ -77,7 +77,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                 className={`p-4 rounded-lg border transition-all ${
                   format === "pdf"
                     ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
-                    : "border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-gray-500"
+                    : "border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
                 }`}
               >
                 <FileText size={24} className="mx-auto mb-2" />
@@ -88,7 +88,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                 className={`p-4 rounded-lg border transition-all ${
                   format === "excel"
                     ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
-                    : "border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-gray-500"
+                    : "border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
                 }`}
               >
                 <svg
@@ -105,7 +105,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
 
           {/* Period Selection */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide">
+            <h3 className="text-sm font-semibold text-zinc-500 dark:text-gray-400 uppercase tracking-wide">
               Report Period
             </h3>
             <div className="space-y-3">
@@ -122,7 +122,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                   className={`w-full p-4 rounded-lg border text-left transition-all ${
                     period === option.value
                       ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
-                      : "border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-gray-500"
+                      : "border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
                   }`}
                 >
                   <span className="text-sm font-medium">{option.label}</span>
@@ -136,7 +136,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                 onClose();
                 onNavigateToProjectReports();
               }}
-              className="w-full p-4 rounded-lg border border-[#404040] bg-[#0f0f0f] text-gray-400 hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all flex items-center justify-between group"
+              className="w-full p-4 rounded-lg border border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all flex items-center justify-between group"
             >
               <span className="text-sm font-medium">Project Wise Report</span>
               <ExternalLink
@@ -148,7 +148,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-[#404040] bg-[#1a1a1a]">
+        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-zinc-200 dark:border-[#404040] bg-white dark:bg-[#1a1a1a]">
           <Button
             variant="primary"
             size="md"
@@ -190,10 +190,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <Card padding="md">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h3 className="text-lg font-semibold text-gray-50">{name}</h3>
+          <h3 className="text-lg font-semibold text-zinc-900 dark:text-gray-50">{name}</h3>
           <div className="flex items-center gap-2 mt-2">
-            <Calendar size={14} className="text-gray-400" />
-            <span className="text-xs text-gray-400">Due: {deadline}</span>
+            <Calendar size={14} className="text-zinc-500 dark:text-gray-400" />
+            <span className="text-xs text-zinc-500 dark:text-gray-400">Due: {deadline}</span>
           </div>
         </div>
         <div className={`px-3 py-1 rounded-full ${config.bg}`}>
@@ -206,8 +206,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Progress Bar */}
       <div className="mb-2">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-gray-400">Progress</span>
-          <span className="text-sm font-medium text-gray-50">
+          <span className="text-sm text-zinc-500 dark:text-gray-400">Progress</span>
+          <span className="text-sm font-medium text-zinc-900 dark:text-gray-50">
             {completion}%
           </span>
         </div>
@@ -239,8 +239,8 @@ const StatCard: React.FC<StatCardProps> = ({
     <Card padding="md">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-400 mb-1">{label}</p>
-          <p className="text-2xl font-semibold text-gray-50">{value}</p>
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mb-1">{label}</p>
+          <p className="text-2xl font-semibold text-zinc-900 dark:text-gray-50">{value}</p>
           {change !== undefined && (
             <div className="flex items-center gap-1 mt-2">
               <TrendingUp
@@ -314,8 +314,8 @@ export const AdminDashboard: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-gray-50">Dashboard</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-gray-50">Dashboard</h1>
+          <p className="text-sm text-zinc-500 dark:text-gray-400 mt-1">
             Welcome back, here's what's happening today
           </p>
         </div>
@@ -361,7 +361,7 @@ export const AdminDashboard: React.FC = () => {
         {/* Ongoing Projects */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-50">
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">
               Ongoing Projects
             </h2>
             <button className="text-sm text-[#F59E0B] hover:text-[#FCD34D] transition-colors">
@@ -377,19 +377,19 @@ export const AdminDashboard: React.FC = () => {
 
         {/* Sidebar - Delayed Tasks */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-50">Delayed Tasks</h2>
+          <h2 className="text-xl font-semibold text-zinc-900 dark:text-gray-50">Delayed Tasks</h2>
           <Card padding="md">
             <div className="space-y-4">
               {delayedTasks.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-start gap-3 pb-4 border-b border-[#404040] last:border-0 last:pb-0"
+                  className="flex items-start gap-3 pb-4 border-b border-zinc-200 dark:border-[#404040] last:border-0 last:pb-0"
                 >
                   <div className="p-2 bg-red-500/10 rounded-lg">
                     <AlertCircle size={16} className="text-red-500" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-50">{item.task}</p>
+                    <p className="text-sm text-zinc-900 dark:text-gray-50">{item.task}</p>
                     <p className="text-xs text-red-500 mt-1">
                       {item.daysOverdue} days overdue
                     </p>
@@ -399,14 +399,14 @@ export const AdminDashboard: React.FC = () => {
             </div>
             {delayedTasks.length === 0 && (
               <div className="text-center py-8">
-                <p className="text-sm text-gray-400">No delayed tasks</p>
+                <p className="text-sm text-zinc-500 dark:text-gray-400">No delayed tasks</p>
               </div>
             )}
           </Card>
 
           {/* Quick Actions */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide">
+            <h3 className="text-sm font-semibold text-zinc-500 dark:text-gray-400 uppercase tracking-wide">
               Quick Actions
             </h3>
             <Button

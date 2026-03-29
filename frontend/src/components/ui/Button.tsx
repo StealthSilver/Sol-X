@@ -24,7 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
     primary:
       "bg-[#F59E0B] text-[#0f0f0f] hover:bg-[#FCD34D] active:bg-[#F59E0B]",
     secondary:
-      "bg-transparent border border-[#E5E7EB] text-[#FAFAFA] hover:bg-[#1a1a1a] active:bg-[#404040]",
+      "border border-zinc-300 bg-transparent text-zinc-900 hover:bg-zinc-100 active:bg-zinc-200 dark:border-[#E5E7EB] dark:text-[#FAFAFA] dark:hover:bg-[#1a1a1a] dark:active:bg-[#404040]",
     destructive:
       "bg-[#EF4444] text-white hover:bg-[#DC2626] active:bg-[#EF4444]",
   };

@@ -63,10 +63,12 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
       className={`flex items-start gap-3 min-w-[320px] max-w-md p-4 rounded-lg border ${config.bgColor} ${config.borderColor} backdrop-blur-sm shadow-lg`}
     >
       <Icon className="flex-shrink-0 mt-0.5" size={20} color={config.color} />
-      <p className="flex-1 text-sm text-gray-50 leading-relaxed">{message}</p>
+      <p className="flex-1 text-sm leading-relaxed text-zinc-900 dark:text-gray-50">
+        {message}
+      </p>
       <button
         onClick={onClose}
-        className="flex-shrink-0 text-gray-400 hover:text-gray-50 transition-colors"
+        className="flex-shrink-0 text-zinc-500 transition-colors hover:text-zinc-900 dark:text-gray-400 dark:hover:text-gray-50"
         aria-label="Close notification"
       >
         <X size={18} />
