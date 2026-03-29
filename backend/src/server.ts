@@ -123,4 +123,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📍 Environment: ${process.env.NODE_ENV || "development"}`);
   console.log(`🔗 API: http://localhost:${PORT}/api`);
+  console.log(`🔗 API: https://sol-x-main.vercel.app/api`);
 });
