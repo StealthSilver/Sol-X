@@ -77,7 +77,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                 className={`p-4 rounded-lg border transition-all ${
                   format === "pdf"
                     ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
-                    : "border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
+                    : "border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
                 }`}
               >
                 <FileText size={24} className="mx-auto mb-2" />
@@ -88,7 +88,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                 className={`p-4 rounded-lg border transition-all ${
                   format === "excel"
                     ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
-                    : "border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
+                    : "border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
                 }`}
               >
                 <svg
@@ -122,7 +122,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                   className={`w-full p-4 rounded-lg border text-left transition-all ${
                     period === option.value
                       ? "border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B]"
-                      : "border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
+                      : "border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-gray-500"
                   }`}
                 >
                   <span className="text-sm font-medium">{option.label}</span>
@@ -136,7 +136,7 @@ const ReportDrawer: React.FC<ReportDrawerProps> = ({
                 onClose();
                 onNavigateToProjectReports();
               }}
-              className="w-full p-4 rounded-lg border border-zinc-200 dark:border-[#404040] bg-zinc-50 dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all flex items-center justify-between group"
+              className="w-full p-4 rounded-lg border border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f] text-zinc-500 dark:text-gray-400 hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all flex items-center justify-between group"
             >
               <span className="text-sm font-medium">Project Wise Report</span>
               <ExternalLink
@@ -211,7 +211,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {completion}%
           </span>
         </div>
-        <div className="h-2 bg-[#404040] rounded-full overflow-hidden">
+        <div className="h-2 overflow-hidden rounded-full bg-stone-200 dark:bg-[#404040]">
           <div
             className="h-full bg-[#F59E0B] rounded-full transition-all duration-300"
             style={{ width: `${completion}%` }}

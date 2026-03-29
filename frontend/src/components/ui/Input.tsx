@@ -30,8 +30,8 @@ export const Input: React.FC<InputProps> = ({
         id={inputId}
         className={`
           w-full px-4 py-2.5 rounded-lg
-          bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
-          text-zinc-800 dark:text-gray-100 placeholder-gray-500
+          border border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f]
+          text-zinc-800 dark:text-gray-100 placeholder-zinc-400 dark:placeholder-gray-500
           focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
@@ -78,8 +78,8 @@ export const TextArea: React.FC<TextAreaProps> = ({
         id={inputId}
         className={`
           w-full px-4 py-2.5 rounded-lg
-          bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
-          text-zinc-800 dark:text-gray-100 placeholder-gray-500
+          border border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f]
+          text-zinc-800 dark:text-gray-100 placeholder-zinc-400 dark:placeholder-gray-500
           focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
@@ -127,7 +127,7 @@ export const Select: React.FC<SelectProps> = ({
         id={inputId}
         className={`
           w-full px-4 py-2.5 rounded-lg
-          bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040]
+          border border-[#e7e2dc] bg-white dark:border-[#404040] dark:bg-[#0f0f0f]
           text-zinc-800 dark:text-gray-100
           focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]
           disabled:opacity-50 disabled:cursor-not-allowed

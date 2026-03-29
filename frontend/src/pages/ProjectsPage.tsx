@@ -116,7 +116,7 @@ const ProjectsPage: React.FC = () => {
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] text-zinc-800 dark:text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
+              className="w-full rounded-lg border border-[#e7e2dc] bg-white py-2.5 pl-10 pr-4 text-zinc-800 placeholder-zinc-400 focus-visible:border-[#F59E0B] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 dark:border-[#404040] dark:bg-[#0f0f0f] dark:text-gray-100 dark:placeholder-gray-500"
             />
           </div>
           <Button variant="secondary">
@@ -132,9 +132,9 @@ const ProjectsPage: React.FC = () => {
           {[1, 2, 3].map((i) => (
             <Card key={i} padding="lg">
               <div className="animate-pulse space-y-4">
-                <div className="h-4 bg-gray-700 rounded w-3/4" />
-                <div className="h-3 bg-gray-700 rounded w-1/2" />
-                <div className="h-3 bg-gray-700 rounded w-full" />
+                <div className="h-4 w-3/4 rounded bg-stone-200 dark:bg-gray-700" />
+                <div className="h-3 w-1/2 rounded bg-stone-200 dark:bg-gray-700" />
+                <div className="h-3 w-full rounded bg-stone-200 dark:bg-gray-700" />
               </div>
             </Card>
           ))}
@@ -142,8 +142,8 @@ const ProjectsPage: React.FC = () => {
       ) : filteredProjects.length === 0 ? (
         <Card padding="lg">
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-[#404040] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-8 h-8 text-zinc-900 dark:text-gray-500" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-stone-200 dark:bg-[#404040]">
+              <Zap className="h-8 w-8 text-stone-500 dark:text-gray-500" />
             </div>
             <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
               No projects found
@@ -176,7 +176,7 @@ const ProjectsPage: React.FC = () => {
                     <h3 className="text-lg font-semibold text-zinc-800 dark:text-gray-100 truncate">
                       {project.name}
                     </h3>
-                    <span className="inline-block mt-1 px-2 py-0.5 text-xs font-medium bg-[#404040] text-zinc-600 dark:text-gray-300 rounded">
+                    <span className="mt-1 inline-block rounded bg-stone-200 px-2 py-0.5 text-xs font-medium text-stone-700 dark:bg-[#404040] dark:text-gray-300">
                       {project.type.replace("_", " ")}
                     </span>
                   </div>

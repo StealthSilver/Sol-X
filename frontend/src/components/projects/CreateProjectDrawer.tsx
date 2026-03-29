@@ -231,7 +231,7 @@ export const CreateProjectDrawer: React.FC<CreateProjectDrawerProps> = ({
         </div>
 
         {/* Actions */}
-        <div className="flex gap-3 pt-4 border-t border-[#404040]">
+        <div className="flex gap-3 border-t border-[#e7e2dc] pt-4 dark:border-[#404040]">
           <Button
             type="button"
             variant="secondary"

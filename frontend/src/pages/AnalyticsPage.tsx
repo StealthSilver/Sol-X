@@ -18,11 +18,10 @@ import { projectApi } from "../api/project.api";
 import type { Project, ProjectStatus, ProjectType } from "../types/project";
 import { PROJECT_STATUSES, PROJECT_TYPES } from "../types/project";
 import { format, startOfMonth, subMonths, eachMonthOfInterval } from "date-fns";
+import { usePreferencesStore } from "../store/preferencesStore";
 
 type AnalyticsTab = "overview" | "timeline";
 
-const chartText = "#9ca3af";
-const chartGrid = "rgba(64, 64, 64, 0.45)";
 const accent = "#F59E0B";
 
 const STATUS_CHART_COLORS: Record<ProjectStatus, string> = {
@@ -40,14 +39,6 @@ const TYPE_CHART_COLORS = [
   "rgba(52, 211, 153, 0.85)",
   "rgba(251, 113, 133, 0.85)",
 ];
-
-const darkTooltip = {
-  backgroundColor: "#262626",
-  titleColor: "#fafafa",
-  bodyColor: "#d4d4d4",
-  borderColor: "#404040",
-  borderWidth: 1,
-} as const;
 
 function truncateLabel(name: string, max = 36): string {
   if (name.length <= max) return name;
@@ -73,6 +64,40 @@ const AnalyticsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<AnalyticsTab>("overview");
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+
+  const theme = usePreferencesStore((s) => s.theme);
+  const isDark = theme === "dark";
+
+  const chartTheme = useMemo(() => {
+    if (isDark) {
+      return {
+        tick: "#9ca3af",
+        grid: "rgba(64, 64, 64, 0.45)",
+        doughnutBorder: "#1a1a1a",
+        pointBorder: "#1a1a1a",
+        tooltip: {
+          backgroundColor: "#262626",
+          titleColor: "#fafafa",
+          bodyColor: "#d4d4d4",
+          borderColor: "#404040",
+          borderWidth: 1,
+        } as const,
+      };
+    }
+    return {
+      tick: "#57534e",
+      grid: "rgba(120, 113, 108, 0.22)",
+      doughnutBorder: "#ffffff",
+      pointBorder: "#ffffff",
+      tooltip: {
+        backgroundColor: "#ffffff",
+        titleColor: "#1c1917",
+        bodyColor: "#57534e",
+        borderColor: "#e7e5e4",
+        borderWidth: 1,
+      } as const,
+    };
+  }, [isDark]);
 
   const load = useCallback(async (isBackground = false) => {
     if (!isBackground) setLoading(true);
@@ -123,12 +148,12 @@ const AnalyticsPage: React.FC = () => {
         {
           data: entries.map((s) => counts.get(s.value) ?? 0),
           backgroundColor: entries.map((s) => STATUS_CHART_COLORS[s.value]),
-          borderColor: "#1a1a1a",
+          borderColor: chartTheme.doughnutBorder,
           borderWidth: 2,
         },
       ],
     };
-  }, [projects]);
+  }, [projects, chartTheme.doughnutBorder]);
 
   const typeChartData = useMemo(() => {
     const counts = new Map<ProjectType, number>();
@@ -174,13 +199,13 @@ const AnalyticsPage: React.FC = () => {
           borderColor: accent,
           backgroundColor: "rgba(245, 158, 11, 0.12)",
           pointBackgroundColor: accent,
-          pointBorderColor: "#1a1a1a",
+          pointBorderColor: chartTheme.pointBorder,
           pointRadius: 4,
           pointHoverRadius: 6,
         },
       ],
     };
-  }, [projects]);
+  }, [projects, chartTheme.pointBorder]);
 
   const budgetChartData = useMemo(() => {
     const withBudget = projects
@@ -261,12 +286,12 @@ const AnalyticsPage: React.FC = () => {
       plugins: {
         legend: {
           position: "right",
-          labels: { color: chartText, boxWidth: 14, padding: 12 },
+          labels: { color: chartTheme.tick, boxWidth: 14, padding: 12 },
         },
-        tooltip: darkTooltip,
+        tooltip: chartTheme.tooltip,
       },
     }),
-    [],
+    [chartTheme],
   );
 
   const barOptions = useMemo(
@@ -275,23 +300,23 @@ const AnalyticsPage: React.FC = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          labels: { color: chartText, font: { size: 12 } },
+          labels: { color: chartTheme.tick, font: { size: 12 } },
         },
-        tooltip: darkTooltip,
+        tooltip: chartTheme.tooltip,
       },
       scales: {
         x: {
-          ticks: { color: chartText, maxRotation: 45, minRotation: 0 },
-          grid: { color: chartGrid },
+          ticks: { color: chartTheme.tick, maxRotation: 45, minRotation: 0 },
+          grid: { color: chartTheme.grid },
         },
         y: {
           beginAtZero: true,
-          ticks: { color: chartText, precision: 0 },
-          grid: { color: chartGrid },
+          ticks: { color: chartTheme.tick, precision: 0 },
+          grid: { color: chartTheme.grid },
         },
       },
     }),
-    [],
+    [chartTheme],
   );
 
   const lineOptions = useMemo(
@@ -300,23 +325,23 @@ const AnalyticsPage: React.FC = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          labels: { color: chartText, font: { size: 12 } },
+          labels: { color: chartTheme.tick, font: { size: 12 } },
         },
-        tooltip: darkTooltip,
+        tooltip: chartTheme.tooltip,
       },
       scales: {
         x: {
-          ticks: { color: chartText },
-          grid: { color: chartGrid },
+          ticks: { color: chartTheme.tick },
+          grid: { color: chartTheme.grid },
         },
         y: {
           beginAtZero: true,
-          ticks: { color: chartText, precision: 0 },
-          grid: { color: chartGrid },
+          ticks: { color: chartTheme.tick, precision: 0 },
+          grid: { color: chartTheme.grid },
         },
       },
     }),
-    [],
+    [chartTheme],
   );
 
   const budgetHorizontalOptions = useMemo(
@@ -326,10 +351,10 @@ const AnalyticsPage: React.FC = () => {
       indexAxis: "y",
       plugins: {
         legend: {
-          labels: { color: chartText, font: { size: 12 } },
+          labels: { color: chartTheme.tick, font: { size: 12 } },
         },
         tooltip: {
-          ...darkTooltip,
+          ...chartTheme.tooltip,
           callbacks: {
             label: (ctx) => {
               const v = ctx.raw as number;
@@ -347,22 +372,22 @@ const AnalyticsPage: React.FC = () => {
         x: {
           beginAtZero: true,
           ticks: {
-            color: chartText,
+            color: chartTheme.tick,
             callback: (value) =>
               new Intl.NumberFormat("en-US", {
                 notation: "compact",
                 maximumFractionDigits: 1,
               }).format(Number(value)),
           },
-          grid: { color: chartGrid },
+          grid: { color: chartTheme.grid },
         },
         y: {
-          ticks: { color: chartText },
+          ticks: { color: chartTheme.tick },
           grid: { display: false },
         },
       },
     }),
-    [],
+    [chartTheme],
   );
 
   const ganttOptions = useMemo(
@@ -373,7 +398,7 @@ const AnalyticsPage: React.FC = () => {
       plugins: {
         legend: { display: false },
         tooltip: {
-          ...darkTooltip,
+          ...chartTheme.tooltip,
           callbacks: {
             label: (ctx) => {
               const raw = ctx.raw as [number, number];
@@ -389,16 +414,16 @@ const AnalyticsPage: React.FC = () => {
         x: {
           type: "time",
           time: { unit: "month" },
-          ticks: { color: chartText, maxTicksLimit: 10 },
-          grid: { color: chartGrid },
+          ticks: { color: chartTheme.tick, maxTicksLimit: 10 },
+          grid: { color: chartTheme.grid },
         },
         y: {
-          ticks: { color: chartText, autoSkip: false, font: { size: 11 } },
+          ticks: { color: chartTheme.tick, autoSkip: false, font: { size: 11 } },
           grid: { display: false },
         },
       },
     }),
-    [],
+    [chartTheme],
   );
 
   const chartKey = lastUpdated?.getTime() ?? 0;
@@ -408,22 +433,22 @@ const AnalyticsPage: React.FC = () => {
       label: "Total projects",
       value: stats.total,
       icon: FolderKanban,
-      accentClass: "text-zinc-700 dark:text-gray-200",
-      iconBg: "bg-[#404040]/60",
+      accentClass: "text-stone-600 dark:text-gray-200",
+      iconBg: "bg-stone-200/90 dark:bg-[#404040]/60",
     },
     {
       label: "Active",
       value: stats.active,
       sub: "Planning & in progress",
       icon: Activity,
-      accentClass: "text-yellow-400",
-      iconBg: "bg-yellow-500/15",
+      accentClass: "text-amber-700 dark:text-yellow-400",
+      iconBg: "bg-amber-500/15",
     },
     {
       label: "Completed",
       value: stats.completed,
       icon: CheckCircle2,
-      accentClass: "text-green-400",
+      accentClass: "text-emerald-700 dark:text-green-400",
       iconBg: "bg-green-500/15",
     },
     {
@@ -431,7 +456,7 @@ const AnalyticsPage: React.FC = () => {
       value: stats.suspended,
       sub: "On hold",
       icon: PauseCircle,
-      accentClass: "text-orange-400",
+      accentClass: "text-orange-700 dark:text-orange-400",
       iconBg: "bg-orange-500/15",
     },
   ];
@@ -449,7 +474,7 @@ const AnalyticsPage: React.FC = () => {
             {POLL_MS / 1000}s and when you return to this tab
           </p>
           {lastUpdated && (
-            <p className="text-xs text-zinc-900 dark:text-gray-500 mt-2">
+            <p className="mt-2 text-xs text-zinc-500 dark:text-gray-500">
               Last synced {format(lastUpdated, "MMM d, yyyy · h:mm:ss a")}
               {refreshing && (
                 <span className="ml-2 text-[#F59E0B]">Refreshing…</span>
@@ -473,7 +498,7 @@ const AnalyticsPage: React.FC = () => {
 
       {error && (
         <Card padding="md" className="border-red-500/40 bg-red-500/5">
-          <p className="text-sm text-red-300">{error}</p>
+          <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
         </Card>
       )}
 
@@ -484,12 +509,12 @@ const AnalyticsPage: React.FC = () => {
             <Card key={s.label} padding="md" className="relative overflow-hidden">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm text-zinc-900 dark:text-gray-500">{s.label}</p>
-                  <p className="text-3xl font-semibold text-zinc-900 dark:text-gray-50 mt-1 tabular-nums">
+                  <p className="text-sm text-zinc-500 dark:text-gray-500">{s.label}</p>
+                  <p className="mt-1 text-3xl font-semibold tabular-nums text-zinc-900 dark:text-gray-50">
                     {loading ? "—" : s.value}
                   </p>
                   {s.sub && (
-                    <p className="text-xs text-zinc-900 dark:text-gray-500 mt-1">{s.sub}</p>
+                    <p className="mt-1 text-xs text-zinc-500 dark:text-gray-500">{s.sub}</p>
                   )}
                 </div>
                 <div
@@ -504,9 +529,9 @@ const AnalyticsPage: React.FC = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <p className="text-sm text-zinc-900 dark:text-gray-500">View</p>
+        <p className="text-sm text-zinc-500 dark:text-gray-500">View</p>
         <div
-          className="inline-flex p-1 rounded-xl bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] w-full sm:w-auto"
+          className="inline-flex w-full rounded-xl border border-[#e7e2dc] bg-white p-1 dark:border-[#404040] dark:bg-[#0f0f0f] sm:w-auto"
           role="tablist"
         >
           <button
@@ -546,12 +571,12 @@ const AnalyticsPage: React.FC = () => {
             <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Status distribution
             </h2>
-            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
+            <p className="text-xs text-zinc-500 dark:text-gray-500 mb-4">
               How projects are spread across lifecycle stages
             </p>
             <div className="h-[280px] flex items-center justify-center">
               {!loading && projects.length === 0 ? (
-                <p className="text-sm text-zinc-900 dark:text-gray-500">No project data yet</p>
+                <p className="text-sm text-zinc-500 dark:text-gray-500">No project data yet</p>
               ) : (
                 <Doughnut
                   key={`status-${chartKey}`}
@@ -566,12 +591,12 @@ const AnalyticsPage: React.FC = () => {
             <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Projects by energy type
             </h2>
-            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
+            <p className="text-xs text-zinc-500 dark:text-gray-500 mb-4">
               Count of active portfolio mix
             </p>
             <div className="h-[280px]">
               {!loading && projects.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-500 dark:text-gray-500">
                   No project data yet
                 </div>
               ) : (
@@ -588,12 +613,12 @@ const AnalyticsPage: React.FC = () => {
             <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               New projects (12 months)
             </h2>
-            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
+            <p className="text-xs text-zinc-500 dark:text-gray-500 mb-4">
               Created date trend for planning load
             </p>
             <div className="h-[260px]">
               {!loading && projects.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-500 dark:text-gray-500">
                   No project data yet
                 </div>
               ) : (
@@ -610,12 +635,12 @@ const AnalyticsPage: React.FC = () => {
             <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Top budgets
             </h2>
-            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
+            <p className="text-xs text-zinc-500 dark:text-gray-500 mb-4">
               Up to ten largest budget allocations
             </p>
             <div className="h-[280px]">
               {!loading && budgetChartData.labels.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-500 dark:text-gray-500">
                   No budget figures recorded
                 </div>
               ) : (
@@ -632,12 +657,12 @@ const AnalyticsPage: React.FC = () => {
             <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
               Installed capacity by type
             </h2>
-            <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
+            <p className="text-xs text-zinc-500 dark:text-gray-500 mb-4">
               Sum of capacity (MW) where specified
             </p>
             <div className="h-[240px]">
               {!loading && capacityByTypeData.labels.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
+                <div className="h-full flex items-center justify-center text-sm text-zinc-500 dark:text-gray-500">
                   No capacity data recorded
                 </div>
               ) : (
@@ -657,7 +682,7 @@ const AnalyticsPage: React.FC = () => {
           <h2 className="text-lg font-medium text-zinc-800 dark:text-gray-100 mb-1">
             Project timeline (Gantt)
           </h2>
-          <p className="text-xs text-zinc-900 dark:text-gray-500 mb-4">
+          <p className="text-xs text-zinc-500 dark:text-gray-500 mb-4">
             Start and end dates; open-ended projects run to today. Colors match
             status.
           </p>
@@ -668,7 +693,7 @@ const AnalyticsPage: React.FC = () => {
             }}
           >
             {!loading && projects.length === 0 ? (
-              <div className="h-[200px] flex items-center justify-center text-sm text-zinc-900 dark:text-gray-500">
+              <div className="h-[200px] flex items-center justify-center text-sm text-zinc-500 dark:text-gray-500">
                 No project data yet
               </div>
             ) : (

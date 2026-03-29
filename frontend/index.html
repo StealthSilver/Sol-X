@@ -5,6 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("sol-x-preferences");
+          if (!raw) return;
+          var data = JSON.parse(raw);
+          var theme = data && data.state && data.state.theme;
+          var root = document.documentElement;
+          if (theme === "light") root.classList.remove("dark");
+          else if (theme === "dark") root.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- Primary Meta Tags -->
     <title>
       Sol-X - Project Monitoring for Renewable Energy Infrastructure

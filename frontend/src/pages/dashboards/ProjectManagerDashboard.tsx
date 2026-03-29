@@ -66,7 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {completion}%
           </span>
         </div>
-        <div className="h-2 bg-[#404040] rounded-full overflow-hidden">
+        <div className="h-2 overflow-hidden rounded-full bg-stone-200 dark:bg-[#404040]">
           <div
             className="h-full bg-[#F59E0B] rounded-full transition-all duration-300"
             style={{ width: `${completion}%` }}

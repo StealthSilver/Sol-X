@@ -50,7 +50,19 @@ export const Sidebar: React.FC = () => {
         {collapsed ? (
           <img src="/icon.svg" alt="Sol-X" className="h-8 w-8" />
         ) : (
-          <img src="/solx-logo.svg" alt="Sol-X" className="h-8" />
+          <>
+            <img
+              src="/solx-logo-light.svg"
+              alt="Sol-X"
+              className="h-8 w-auto dark:hidden"
+            />
+            <img
+              src="/solx-logo.svg"
+              alt=""
+              className="hidden h-8 w-auto dark:block"
+              aria-hidden
+            />
+          </>
         )}
       </div>
 

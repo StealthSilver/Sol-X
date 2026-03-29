@@ -211,7 +211,7 @@ export const ViewerDashboard: React.FC = () => {
                         {project.completion}%
                       </span>
                     </div>
-                    <div className="h-1.5 bg-[#404040] rounded-full overflow-hidden">
+                    <div className="h-1.5 overflow-hidden rounded-full bg-stone-200 dark:bg-[#404040]">
                       <div
                         className="h-full bg-[#F59E0B] rounded-full transition-all duration-300"
                         style={{ width: `${project.completion}%` }}

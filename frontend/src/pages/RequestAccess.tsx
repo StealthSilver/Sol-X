@@ -49,14 +49,13 @@ const RequestAccess: React.FC = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4">
+      <div className="flex min-h-screen items-center justify-center bg-[#f5f2ed] px-4 dark:bg-[#0f0f0f]">
         <div className="w-full max-w-md">
-          <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg text-center">
-            {/* Success Icon */}
+          <div className="rounded-lg border border-[#e7e2dc] bg-white p-8 text-center shadow-lg dark:border-transparent dark:bg-[#1a1a1a]">
             <div className="mb-6 flex justify-center">
-              <div className="w-16 h-16 bg-[#10B981]/10 rounded-full flex items-center justify-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10">
                 <svg
-                  className="w-8 h-8 text-[#10B981]"
+                  className="h-8 w-8 text-emerald-600 dark:text-[#10B981]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -71,17 +70,17 @@ const RequestAccess: React.FC = () => {
               </div>
             </div>
 
-            <h2 className="text-2xl font-semibold text-gray-50 mb-3">
+            <h2 className="mb-3 text-2xl font-semibold text-stone-900 dark:text-gray-50">
               Request Submitted
             </h2>
-            <p className="text-gray-400 mb-6">
+            <p className="mb-6 text-stone-600 dark:text-gray-400">
               Your access request has been submitted successfully. Our team will
               review your request and get back to you soon.
             </p>
 
             <Link
               to="/login"
-              className="inline-block w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-medium py-3 rounded-md transition-all duration-200"
+              className="inline-block w-full rounded-md bg-[#F59E0B] py-3 font-medium text-[#0f0f0f] transition-all duration-200 hover:bg-[#D97706]"
             >
               Back to Login
             </Link>
@@ -91,27 +90,30 @@ const RequestAccess: React.FC = () => {
     );
   }
 
+  const fieldClass =
+    "w-full rounded-md border border-stone-300 bg-white px-4 py-3 text-stone-900 placeholder-stone-400 transition-all duration-200 focus-visible:border-[#F59E0B] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 dark:border-gray-700 dark:bg-[#0f0f0f] dark:text-gray-100 dark:placeholder-gray-500";
+
   return (
-    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4 py-8">
+    <div className="flex min-h-screen items-center justify-center bg-[#f5f2ed] px-4 py-8 dark:bg-[#0f0f0f]">
       <div className="w-full max-w-md">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-semibold text-gray-50 mb-2">Sol-X</h1>
-          <p className="text-gray-400 text-sm">
+        <div className="mb-8 text-center">
+          <h1 className="mb-2 text-3xl font-semibold text-stone-900 dark:text-gray-50">
+            Sol-X
+          </h1>
+          <p className="text-sm text-stone-600 dark:text-gray-400">
             Request access to the platform
           </p>
         </div>
 
-        {/* Request Access Card */}
-        <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg">
-          <h2 className="text-xl font-semibold text-gray-50 mb-6">
+        <div className="rounded-lg border border-[#e7e2dc] bg-white p-8 shadow-lg dark:border-transparent dark:bg-[#1a1a1a]">
+          <h2 className="mb-6 text-xl font-semibold text-stone-900 dark:text-gray-50">
             Request Access
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Error Message */}
             {error && (
-              <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-md text-sm">
+              <div className="rounded-md border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-400">
                 {error}
               </div>
             )}
@@ -120,7 +122,7 @@ const RequestAccess: React.FC = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="mb-2 block text-sm font-medium text-stone-700 dark:text-gray-300"
               >
                 Full Name
               </label>
@@ -128,11 +130,11 @@ const RequestAccess: React.FC = () => {
                 {...register("name")}
                 type="text"
                 id="name"
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200"
+                className={fieldClass}
                 placeholder="John Doe"
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-400">
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                   {errors.name.message}
                 </p>
               )}
@@ -142,7 +144,7 @@ const RequestAccess: React.FC = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="mb-2 block text-sm font-medium text-stone-700 dark:text-gray-300"
               >
                 Email Address
               </label>
@@ -150,11 +152,11 @@ const RequestAccess: React.FC = () => {
                 {...register("email")}
                 type="email"
                 id="email"
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200"
+                className={fieldClass}
                 placeholder="you@company.com"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-400">
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                   {errors.email.message}
                 </p>
               )}
@@ -164,7 +166,7 @@ const RequestAccess: React.FC = () => {
             <div>
               <label
                 htmlFor="company"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="mb-2 block text-sm font-medium text-stone-700 dark:text-gray-300"
               >
                 Company Name
               </label>
@@ -172,11 +174,11 @@ const RequestAccess: React.FC = () => {
                 {...register("company")}
                 type="text"
                 id="company"
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200"
+                className={fieldClass}
                 placeholder="Your Company"
               />
               {errors.company && (
-                <p className="mt-1 text-sm text-red-400">
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                   {errors.company.message}
                 </p>
               )}
@@ -186,7 +188,7 @@ const RequestAccess: React.FC = () => {
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-300 mb-2"
+                className="mb-2 block text-sm font-medium text-stone-700 dark:text-gray-300"
               >
                 Message
               </label>
@@ -194,11 +196,11 @@ const RequestAccess: React.FC = () => {
                 {...register("message")}
                 id="message"
                 rows={4}
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-gray-700 rounded-md text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B] transition-all duration-200 resize-none"
+                className={`${fieldClass} resize-none`}
                 placeholder="Tell us why you need access and what role you're interested in..."
               />
               {errors.message && (
-                <p className="mt-1 text-sm text-red-400">
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                   {errors.message.message}
                 </p>
               )}
@@ -208,7 +210,7 @@ const RequestAccess: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-medium py-3 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-md bg-[#F59E0B] py-3 font-medium text-[#0f0f0f] transition-all duration-200 hover:bg-[#D97706] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -242,11 +244,11 @@ const RequestAccess: React.FC = () => {
 
           {/* Login Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-stone-600 dark:text-gray-400">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-[#F59E0B] hover:text-[#D97706] font-medium transition-colors duration-200"
+                className="font-medium text-[#F59E0B] transition-colors duration-200 hover:text-[#D97706]"
               >
                 Sign In
               </Link>
@@ -255,7 +257,7 @@ const RequestAccess: React.FC = () => {
         </div>
 
         {/* Footer Note */}
-        <p className="mt-8 text-center text-xs text-gray-500">
+        <p className="mt-8 text-center text-xs text-stone-500 dark:text-gray-500">
           Your request will be reviewed by our team
         </p>
       </div>

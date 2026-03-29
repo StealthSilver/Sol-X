@@ -30,19 +30,9 @@ const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 
 // Loading fallback
 const LoadingSpinner = () => (
-  <div className="flex min-h-screen items-center justify-center bg-zinc-100 text-zinc-900 dark:bg-[#0f0f0f] dark:text-[#FAFAFA]">
-    <div style={{ textAlign: "center" }}>
-      <div
-        style={{
-          width: "40px",
-          height: "40px",
-          border: "4px solid #1a1a1a",
-          borderTop: "4px solid #F59E0B",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-          margin: "0 auto 16px",
-        }}
-      />
+  <div className="flex min-h-screen items-center justify-center bg-[#f5f2ed] text-stone-900 dark:bg-[#0f0f0f] dark:text-[#FAFAFA]">
+    <div className="text-center">
+      <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-stone-200 border-t-[#F59E0B] dark:border-[#1a1a1a]" />
       <p>Loading...</p>
     </div>
   </div>

@@ -160,13 +160,15 @@ const Login = () => {
         {/* Logo */}
         <div style={{ textAlign: "center", padding: "32px 48px 24px" }}>
           <img
-            src="/solx-logo.svg"
+            src="/solx-logo-light.svg"
             alt="Sol-X"
-            style={{
-              height: "48px",
-              width: "auto",
-              margin: "0 auto",
-            }}
+            className="mx-auto h-12 w-auto dark:hidden"
+          />
+          <img
+            src="/solx-logo.svg"
+            alt=""
+            className="mx-auto hidden h-12 w-auto dark:block"
+            aria-hidden
           />
         </div>
 

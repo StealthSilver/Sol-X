@@ -7,7 +7,7 @@ import { ToastContainer } from "../ui/ToastContainer";
 export const AppLayout: React.FC = () => {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen bg-zinc-100 text-zinc-900 dark:bg-[#0f0f0f] dark:text-gray-50">
+      <div className="flex min-h-screen bg-[#f5f2ed] text-stone-900 dark:bg-[#0f0f0f] dark:text-gray-50">
         {/* Sidebar */}
         <Sidebar />
 

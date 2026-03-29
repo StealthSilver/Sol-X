@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 
 const AccessDenied: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#f5f2ed] px-4 dark:bg-[#0f0f0f]">
       <div className="w-full max-w-md text-center">
-        <div className="bg-[#1a1a1a] rounded-lg p-8 shadow-lg">
-          {/* Icon */}
+        <div className="rounded-lg border border-[#e7e2dc] bg-white p-8 shadow-lg dark:border-transparent dark:bg-[#1a1a1a]">
           <div className="mb-6 flex justify-center">
-            <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10">
               <svg
-                className="w-8 h-8 text-red-400"
+                className="h-8 w-8 text-red-600 dark:text-red-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -25,17 +24,17 @@ const AccessDenied: React.FC = () => {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-gray-50 mb-3">
+          <h2 className="mb-3 text-2xl font-semibold text-stone-900 dark:text-gray-50">
             Access Denied
           </h2>
-          <p className="text-gray-400 mb-6">
-            You don't have permission to access this resource. Please contact
-            your administrator if you believe this is an error.
+          <p className="mb-6 text-stone-600 dark:text-gray-400">
+            You don&apos;t have permission to access this resource. Please
+            contact your administrator if you believe this is an error.
           </p>
 
           <Link
             to="/dashboard"
-            className="inline-block w-full bg-[#F59E0B] hover:bg-[#D97706] text-white font-medium py-3 rounded-md transition-all duration-200"
+            className="inline-block w-full rounded-md bg-[#F59E0B] py-3 font-medium text-[#0f0f0f] transition-all duration-200 hover:bg-[#D97706]"
           >
             Back to Dashboard
           </Link>

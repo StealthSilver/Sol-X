@@ -27,9 +27,9 @@ const notificationConfig = {
   },
   info: {
     icon: Info,
-    color: "#404040",
-    bgColor: "bg-slate-500/10",
-    borderColor: "border-slate-500/30",
+    color: "currentColor",
+    bgColor: "bg-stone-200/80 dark:bg-slate-500/10",
+    borderColor: "border-stone-300/90 dark:border-slate-500/30",
   },
 };
 
@@ -62,7 +62,13 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
       }}
       className={`flex items-start gap-3 min-w-[320px] max-w-md p-4 rounded-lg border ${config.bgColor} ${config.borderColor} backdrop-blur-sm shadow-lg`}
     >
-      <Icon className="flex-shrink-0 mt-0.5" size={20} color={config.color} />
+      <Icon
+        className={`mt-0.5 flex-shrink-0 ${
+          type === "info" ? "text-stone-600 dark:text-gray-300" : ""
+        }`}
+        size={20}
+        color={type === "info" ? "currentColor" : config.color}
+      />
       <p className="flex-1 text-sm leading-relaxed text-zinc-900 dark:text-gray-50">
         {message}
       </p>

@@ -136,13 +136,13 @@ const UsersPage: React.FC = () => {
 
       <Card padding="md">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-900 dark:text-gray-500" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400 dark:text-gray-500" />
           <input
             type="text"
             placeholder="Search by name, email, role, destination, or project..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-zinc-50 dark:bg-[#0f0f0f] border border-zinc-200 dark:border-[#404040] text-zinc-800 dark:text-gray-100 placeholder-gray-500 focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 focus-visible:border-[#F59E0B]"
+            className="w-full rounded-lg border border-[#e7e2dc] bg-white py-2.5 pl-10 pr-4 text-zinc-800 placeholder-zinc-400 focus-visible:border-[#F59E0B] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#F59E0B] focus-visible:outline-offset-0 dark:border-[#404040] dark:bg-[#0f0f0f] dark:text-gray-100 dark:placeholder-gray-500"
           />
         </div>
       </Card>
@@ -150,16 +150,16 @@ const UsersPage: React.FC = () => {
       {isLoading ? (
         <Card padding="lg">
           <div className="animate-pulse space-y-4">
-            <div className="h-10 bg-gray-700 rounded w-full" />
-            <div className="h-10 bg-gray-700 rounded w-full" />
-            <div className="h-10 bg-gray-700 rounded w-full" />
+            <div className="h-10 w-full rounded bg-stone-200 dark:bg-gray-700" />
+            <div className="h-10 w-full rounded bg-stone-200 dark:bg-gray-700" />
+            <div className="h-10 w-full rounded bg-stone-200 dark:bg-gray-700" />
           </div>
         </Card>
       ) : filteredUsers.length === 0 ? (
         <Card padding="lg">
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-[#404040] rounded-full flex items-center justify-center mx-auto mb-4">
-              <UsersIcon className="w-8 h-8 text-zinc-900 dark:text-gray-500" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-stone-200 dark:bg-[#404040]">
+              <UsersIcon className="h-8 w-8 text-stone-500 dark:text-gray-500" />
             </div>
             <h3 className="text-lg font-medium text-zinc-700 dark:text-gray-200 mb-2">
               {searchQuery ? "No users match your search" : "No users yet"}
@@ -182,7 +182,7 @@ const UsersPage: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-[#404040] bg-[#141414]">
+                <tr className="border-b border-[#e7e2dc] bg-stone-100/90 dark:border-[#404040] dark:bg-[#141414]">
                   <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400">Name</th>
                   <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400">Email</th>
                   <th className="px-4 py-3 font-medium text-zinc-500 dark:text-gray-400">Role</th>
@@ -209,7 +209,7 @@ const UsersPage: React.FC = () => {
                           {u.name}
                         </span>
                         {!u.isActive && (
-                          <span className="text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded bg-gray-700 text-zinc-600 dark:text-gray-300">
+                          <span className="rounded bg-stone-200 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-stone-600 dark:bg-gray-700 dark:text-gray-300">
                             Inactive
                           </span>
                         )}
@@ -272,7 +272,7 @@ const UsersPage: React.FC = () => {
 
       {deleteTarget && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-stone-900/40 p-4 backdrop-blur-sm dark:bg-black/70"
           role="dialog"
           aria-modal="true"
           aria-labelledby="delete-user-title"

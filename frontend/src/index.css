@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (Tailwind v4 defaults to prefers-color-scheme otherwise) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
 html {
@@ -8,13 +11,13 @@ html {
   overscroll-behavior: none;
 }
 
-/* Light theme (no .dark on html) */
+/* Light theme — warm neutrals, same amber accent family as dark */
 html {
-  --background: #f4f4f5;
-  --foreground: #18181b;
-  --charcoal-900: #fafafa;
+  --background: #f5f2ed;
+  --foreground: #1c1917;
+  --charcoal-900: #faf8f5;
   --charcoal-700: #ffffff;
-  --charcoal-500: #d4d4d8;
+  --charcoal-500: #e7e2dc;
   --solar-amber-500: #f59e0b;
   --solar-amber-300: #fcd34d;
   --green-500: #10b981;
@@ -54,6 +57,10 @@ body {
     background: var(--charcoal-700);
     border: 1px solid var(--charcoal-500);
     border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  }
+
+  html.dark & .card-elevated {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
 
@@ -116,8 +123,6 @@ body {
     background-color: rgba(245, 158, 11, 0.3);
     color: var(--foreground);
   }
-
-  animation: fadeOut 0.3s ease-in forwards;
 }
 
 /* Global Scrollbar Styling */

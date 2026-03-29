@@ -9,6 +9,13 @@ export const ThemeSync: React.FC = () => {
     const root = document.documentElement;
     if (theme === "dark") root.classList.add("dark");
     else root.classList.remove("dark");
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta)
+      meta.setAttribute(
+        "content",
+        theme === "dark" ? "#0F0F0F" : "#f5f2ed",
+      );
   }, [theme]);
 
   return null;
