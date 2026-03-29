@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
 import prisma from "../lib/prisma";
+import { sendPrismaFailure } from "../lib/prismaErrors";
 import { sendAccessRequestEmail } from "../lib/email";
 import { LoginResponse, ApiResponse } from "../types/auth.types";
 
@@ -85,8 +86,6 @@ export const login = async (req: Request, res: Response) => {
       data: response,
     } as ApiResponse<LoginResponse>);
   } catch (error) {
-    console.error("Login error:", error);
-
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,
@@ -94,10 +93,12 @@ export const login = async (req: Request, res: Response) => {
       } as ApiResponse);
     }
 
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred during login",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "login",
+      error,
+      "An error occurred during login",
+    );
   }
 };
 
@@ -151,8 +152,6 @@ export const requestAccess = async (req: Request, res: Response) => {
       },
     } as ApiResponse);
   } catch (error) {
-    console.error("Request access error:", error);
-
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,
@@ -160,10 +159,12 @@ export const requestAccess = async (req: Request, res: Response) => {
       } as ApiResponse);
     }
 
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while processing your request",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "requestAccess",
+      error,
+      "An error occurred while processing your request",
+    );
   }
 };
 
@@ -234,8 +235,6 @@ export const updateProfile = async (req: Request, res: Response) => {
       },
     } as ApiResponse);
   } catch (error) {
-    console.error("Update profile error:", error);
-
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,
@@ -243,10 +242,12 @@ export const updateProfile = async (req: Request, res: Response) => {
       } as ApiResponse);
     }
 
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while updating profile",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "updateProfile",
+      error,
+      "An error occurred while updating profile",
+    );
   }
 };
 
@@ -289,10 +290,11 @@ export const getProfile = async (req: Request, res: Response) => {
       },
     } as ApiResponse);
   } catch (error) {
-    console.error("Get profile error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "An error occurred while fetching profile",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "getProfile",
+      error,
+      "An error occurred while fetching profile",
+    );
   }
 };

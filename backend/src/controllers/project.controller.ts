@@ -1,26 +1,10 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import prisma from "../lib/prisma";
-import { isDbConnectionError, logPrismaError } from "../lib/prismaErrors";
+import { sendPrismaFailure } from "../lib/prismaErrors";
 import { routeStringParam } from "../lib/routeParams";
 import { ApiResponse } from "../types/auth.types";
 import { ProjectResponse, ProjectListResponse } from "../types/project.types";
-
-function sendPrismaFailure(
-  res: Response,
-  context: string,
-  error: unknown,
-  defaultMessage: string,
-) {
-  logPrismaError(context, error);
-  const conn = isDbConnectionError(error);
-  return res.status(conn ? 503 : 500).json({
-    success: false,
-    error: conn
-      ? "Database temporarily unavailable. Check DATABASE_URL or try again shortly."
-      : defaultMessage,
-  } as ApiResponse);
-}
 
 // Validation schemas
 const createProjectSchema = z.object({
@@ -120,8 +104,6 @@ export const createProject = async (req: Request, res: Response) => {
       data: response,
     } as ApiResponse<ProjectResponse>);
   } catch (error) {
-    console.error("Create project error:", error);
-
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,
@@ -331,8 +313,6 @@ export const updateProject = async (req: Request, res: Response) => {
       data: response,
     } as ApiResponse<ProjectResponse>);
   } catch (error) {
-    console.error("Update project error:", error);
-
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,

@@ -1,4 +1,6 @@
 import { Prisma } from "@prisma/client";
+import type { Response } from "express";
+import type { ApiResponse } from "../types/auth.types";
 
 const CONNECTION_CODES = new Set([
   "P1001", // Can't reach database server
@@ -24,4 +26,20 @@ export function logPrismaError(context: string, error: unknown): void {
     }
   }
   console.error(`[${context}]`, error);
+}
+
+export function sendPrismaFailure(
+  res: Response,
+  context: string,
+  error: unknown,
+  defaultMessage: string,
+) {
+  logPrismaError(context, error);
+  const conn = isDbConnectionError(error);
+  return res.status(conn ? 503 : 500).json({
+    success: false,
+    error: conn
+      ? "Database temporarily unavailable. Check DATABASE_URL or try again shortly."
+      : defaultMessage,
+  } as ApiResponse);
 }

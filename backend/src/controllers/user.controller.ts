@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 import prisma from "../lib/prisma";
+import { sendPrismaFailure } from "../lib/prismaErrors";
+import { routeStringParam } from "../lib/routeParams";
 import { ApiResponse } from "../types/auth.types";
 import { Role } from "@prisma/client";
 
@@ -105,11 +107,12 @@ export const listUsers = async (req: Request, res: Response) => {
       data: { users: data },
     } as ApiResponse<{ users: typeof data }>);
   } catch (error) {
-    console.error("List users error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "Failed to load users",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "listUsers",
+      error,
+      "Failed to load users",
+    );
   }
 };
 
@@ -210,24 +213,25 @@ export const createUser = async (req: Request, res: Response) => {
       },
     } as ApiResponse);
   } catch (error) {
-    console.error("Create user error:", error);
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,
         error: error.errors[0].message,
       } as ApiResponse);
     }
-    return res.status(500).json({
-      success: false,
-      error: "Failed to create user",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "createUser",
+      error,
+      "Failed to create user",
+    );
   }
 };
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const actor = req.user!;
-    const id = String(req.params.id ?? "");
+    const id = routeStringParam(req);
     if (!id) {
       return res.status(400).json({
         success: false,
@@ -371,24 +375,25 @@ export const updateUser = async (req: Request, res: Response) => {
       },
     } as ApiResponse);
   } catch (error) {
-    console.error("Update user error:", error);
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         success: false,
         error: error.errors[0].message,
       } as ApiResponse);
     }
-    return res.status(500).json({
-      success: false,
-      error: "Failed to update user",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "updateUser",
+      error,
+      "Failed to update user",
+    );
   }
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const actor = req.user!;
-    const id = String(req.params.id ?? "");
+    const id = routeStringParam(req);
     if (!id) {
       return res.status(400).json({
         success: false,
@@ -430,10 +435,11 @@ export const deleteUser = async (req: Request, res: Response) => {
       data: { message: "User deleted" },
     } as ApiResponse);
   } catch (error) {
-    console.error("Delete user error:", error);
-    return res.status(500).json({
-      success: false,
-      error: "Failed to delete user",
-    } as ApiResponse);
+    return sendPrismaFailure(
+      res,
+      "deleteUser",
+      error,
+      "Failed to delete user",
+    );
   }
 };
